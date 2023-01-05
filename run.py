@@ -15,7 +15,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 # const to hold the untracked credentials file
 CREDS = Credentials.from_service_account_file("creds.json")
@@ -27,16 +27,16 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("lidl_bake_wk_52")
 
 # vars to reference the individual worksheets of the full spreadsheet
-wk52_tue_sheet = SHEET.worksheet("tue-27-12-22")
-wk52_wed_sheet = SHEET.worksheet("wed-28-12-22")
-wk52_thu_sheet = SHEET.worksheet("thu-29-12-22")
-item_reference_sheet = SHEET.worksheet("item-reference")
+# wk52_tue_sheet = SHEET.worksheet("27-12-22")
+# wk52_wed_sheet = SHEET.worksheet("28-12-22")
+# wk52_thu_sheet = SHEET.worksheet("29-12-22")
+# item_reference_sheet = SHEET.worksheet("item-reference")
 
 # vars containing the data of the specified sheet in list format
-wk52_tue_data = wk52_tue_sheet.get_all_values()
-wk52_wed_data = wk52_wed_sheet.get_all_values()
-wk52_thu_data = wk52_thu_sheet.get_all_values()
-item_reference_data = item_reference_sheet.get_all_values()
+# wk52_tue_data = wk52_tue_sheet.get_all_values()
+# wk52_wed_data = wk52_wed_sheet.get_all_values()
+# wk52_thu_data = wk52_thu_sheet.get_all_values()
+# item_reference_data = item_reference_sheet.get_all_values()
 
 # print to test API function
 # print(wk52_tue_data)
@@ -51,9 +51,22 @@ def capture_date_input():
     The output is passed as an argument to the function to get the
     current day's worksheet
     """
-    captured_date = input("Please input today's date in the format DD-MM-YY:\n")
+    captured_date = input(
+        "Please input today's date in the format DD-MM-YY:\n")
     return captured_date
 
 
 captured_date = capture_date_input()
 print(captured_date)
+
+
+def get_current_worksheet(date):
+    """
+    This function takes the captured date as an argument to select the
+    appropriate worksheet
+    """
+    current_worksheet = SHEET.worksheet(date)
+    print(current_worksheet.get_all_values())
+
+
+get_current_worksheet(captured_date)
