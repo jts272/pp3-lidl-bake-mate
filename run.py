@@ -3,11 +3,14 @@
 # Source guide for dependencies and var setup:
 # https://www.youtube.com/watch?v=lPTKUiafTRY
 
+# pprint used to better render list data in terminal
+from pprint import pprint
 # gspread and google-auth installed via pip3 install command
 # gspread library used for google sheets integration
 import gspread
 # Only Credentials class imported from google-auth for authorization
 from google.oauth2.service_account import Credentials
+
 
 # Set scope for Google IAM authentication for the APIs the program has
 # access to.
@@ -66,7 +69,7 @@ def get_current_worksheet(date):
     appropriate worksheet
     """
     current_worksheet = SHEET.worksheet(date)
-    print(current_worksheet.get_all_values())
+    pprint(current_worksheet.get_all_values())
 
 
 get_current_worksheet(captured_date)
