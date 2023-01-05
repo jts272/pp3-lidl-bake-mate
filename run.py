@@ -39,7 +39,21 @@ wk52_thu_data = wk52_thu_sheet.get_all_values()
 item_reference_data = item_reference_sheet.get_all_values()
 
 # print to test API function
-print(wk52_tue_data)
-print(wk52_wed_data)
-print(wk52_thu_data)
-print(item_reference_data)
+# print(wk52_tue_data)
+# print(wk52_wed_data)
+# print(wk52_thu_data)
+# print(item_reference_data)
+
+
+def capture_date_input():
+    """
+    This function takes user input for the current date as a string.
+    The output is passed as an argument to the function to get the
+    current day's worksheet
+    """
+    captured_date = input("Please input today's date in the format DD-MM-YY:\n")
+    return captured_date
+
+
+captured_date = capture_date_input()
+print(captured_date)
