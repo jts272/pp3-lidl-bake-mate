@@ -4,7 +4,7 @@
 # https://www.youtube.com/watch?v=lPTKUiafTRY
 
 # pprint used to better render list data in terminal
-from pprint import pprint
+# from pprint import pprint
 # gspread and google-auth installed via pip3 install command
 # gspread library used for google sheets integration
 import gspread
@@ -59,8 +59,8 @@ def capture_date_input():
     return captured_date
 
 
-captured_date = capture_date_input()
-print(captured_date)
+capt_date = capture_date_input()
+# print(capt_date)
 
 
 def get_current_worksheet(date):
@@ -69,7 +69,30 @@ def get_current_worksheet(date):
     appropriate worksheet
     """
     current_worksheet = SHEET.worksheet(date)
-    pprint(current_worksheet.get_all_values())
+    # pprint(current_worksheet.get_all_values())
+    return current_worksheet
 
 
-get_current_worksheet(captured_date)
+cur_wksh = get_current_worksheet(capt_date)
+# print(cur_wksh)
+
+
+def get_stock_required():
+    """
+    Using the current worksheet var, this function returns a list of
+    numbers which represent the stock required for the current day.
+    """
+    # Get the values of the stock on hand column from the worksheet
+    on_hand_col = cur_wksh.col_values(2)
+    # Use a list slice to remove the heading, leaving numbers
+    # https://www.geeksforgeeks.org/python-list-slicing/
+    on_hand_nums = on_hand_col[1::]
+    # Use list comprehension to convert the list to ints
+    # https://www.geeksforgeeks.org/
+    # python-converting-all-strings-in-list-to-integers/
+    # (Multi-line hyperlink)
+    on_hand_ints = [int(n) for n in on_hand_nums]
+    return on_hand_ints
+
+
+print(get_stock_required())
