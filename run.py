@@ -42,12 +42,14 @@ item_reference_sheet = SHEET.worksheet("item-reference")
 # wk52_wed_data = wk52_wed_sheet.get_all_values()
 # wk52_thu_data = wk52_thu_sheet.get_all_values()
 item_reference_data = item_reference_sheet.get_all_values()
+item_reference_dict = item_reference_sheet.get_all_records()
 
 # print to test API function
 # print(wk52_tue_data)
 # print(wk52_wed_data)
 # print(wk52_thu_data)
 # pprint(item_reference_data)
+pprint(item_reference_dict)
 
 
 def capture_date_input():
@@ -136,6 +138,6 @@ def convert_csv_to_dict_list(csv_filename):
     return output_list
 
 
-item_reference = (convert_csv_to_dict_list('item-reference.csv'))
-pprint(item_reference)
-print(type(item_reference))
+# item_reference = (convert_csv_to_dict_list('item-reference.csv'))
+# pprint(item_reference)
+# print(type(item_reference))
