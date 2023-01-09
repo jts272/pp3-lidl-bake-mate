@@ -6,7 +6,7 @@
 # pprint used to better render list data in terminal
 from pprint import pprint
 # DictReader is used to construct data structures from csv files
-from csv import DictReader
+# from csv import DictReader
 # gspread and google-auth installed via pip3 install command
 # gspread library used for google sheets integration
 import gspread
@@ -49,45 +49,40 @@ item_reference_dict = item_reference_sheet.get_all_records()
 # print(wk52_wed_data)
 # print(wk52_thu_data)
 # pprint(item_reference_data)
-pprint(item_reference_dict)
+# pprint(item_reference_dict)
 
 
 def capture_date_input():
     """
     This function takes user input for the current date as a string.
     The output is passed as an argument to the function to get the
-    current day's worksheet
+    current day's worksheet.
     """
     captured_date = input(
         "Please input today's date in the format DD-MM-YY:\n")
     return captured_date
 
 
-# capt_date = capture_date_input()
-# print(capt_date)
-
-
 def get_current_worksheet(date):
     """
     This function takes the captured date as an argument to select the
-    appropriate worksheet
+    appropriate worksheet.
     """
     current_worksheet = SHEET.worksheet(date)
     # pprint(current_worksheet.get_all_values())
     return current_worksheet
 
 
-# cur_wksh = get_current_worksheet(capt_date)
-# print(cur_wksh)
-
-
-def get_stock_required():
+def get_stock_required(worksheet):
     """
     Using the current worksheet var, this function returns a list of
     numbers which represent the stock required for the current day.
+
+    Parameter added for worksheet for scope compatibility from main
+    function.
     """
     # Get the values of the stock on hand column from the worksheet
-    on_hand_col = cur_wksh.col_values(2)
+    on_hand_col = worksheet.col_values(2)
     # Use a list slice to remove the heading, leaving numbers
     # https://www.geeksforgeeks.org/python-list-slicing/
     on_hand_nums = on_hand_col[1::]
@@ -99,45 +94,19 @@ def get_stock_required():
     return on_hand_ints
 
 
-# print(get_stock_required())
-
-
-def convert_csv_to_dict_list(csv_filename):
+def main():
     """
-    This function returns a list of dictionaries from the inputted csv
-    file using the DictReader function from the built-in csv library.
-    The first row of the csv file is used as the dictionary keys.
-
-    The parameter references the csv file name used to generate the
-    list.
-
-    The following guide was used in the construction of this function:
-    https://www.youtube.com/watch?v=5CEsJkKhS78
+    This function calls the other functions in sequence as appropriate
+    for program function.
     """
-    # Create empty list to hold the dictionary items
-    output_list = []
-    # Create var to reference the open csv file
-    csv_file = open(csv_filename, encoding="utf8")
-    # Create a csv.DictReader type object (iterable)
-    csv_obj = DictReader(csv_file)
-    # pprint(csv_obj)
-    # Iterate through each dictionary item created from the DictReader
-    # method
-    for item in csv_obj:
-        # pprint(item)
-        # Each dictionary item is then appended to the empty list at the
-        # start of the function
-        output_list.append(item)
-    # Working file is closed
-    csv_file.close()
-    # pprint(master_list)
-    # Return the list with the dictionaries of each bakery item as a
-    # list item. The returned list is automatically returned in
-    # alphabetical order so the csv headings have been placed in a
-    # logical order
-    return output_list
+    capt_date = (capture_date_input())
+    print(type(capt_date))
+
+    curr_worksheet = get_current_worksheet(capt_date)
+    print(curr_worksheet)
+
+    stock_req = get_stock_required(curr_worksheet)
+    print(stock_req)
 
 
-# item_reference = (convert_csv_to_dict_list('item-reference.csv'))
-# pprint(item_reference)
-# print(type(item_reference))
+main()
