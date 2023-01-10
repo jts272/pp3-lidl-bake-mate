@@ -146,10 +146,49 @@ def get_stock_on_hand(program_items, program_name):
     # Loop through each item in the given program and take input for the
     # current number of items still on sale
     for item in program_items:
-        print(f"Please input stock on hand for {item}:")
-        input_str = input("Current stock:")
-        print(f"You entered {input_str} units for {item}")
-        input_list.append(input_str)
+        # Credit to this blog for error handling structure on input:
+        # https://bobbyhadz.com/blog/python-while-loop-user-input
+        # Create a while loop so that the current iteration of the
+        # parent for loop will run until input is valid
+        while True:
+            # The try block executes and looks to catch errors from the
+            # user's input if it is not an int value
+            try:
+                print(f"Please input stock on hand for {item}:\n")
+                # This var specifies that the user's input must be of
+                # int type, which works with the following except
+                # statement
+                input_str = int((input("Current stock:")))
+            # The except block runs when the user does not enter an int
+            except ValueError:
+                # This message displays when the exception is caught and
+                # notifies the user of the correct type of input needed
+                print(
+                    "Please enter a number of 0 or higher when recording stock"
+                    "\n"
+                )
+                # continue kw used to repeat the while loop so the user
+                # can try a different value for the current item's stock
+                # level
+                continue
+            # The following if else statments work when the user
+            # provides an int, then checks that it was in the valid
+            # range of 0 or above
+            if input_str >= 0:
+                # The user's input is confirmed
+                print(f"You entered {input_str} units for {item}\n")
+                # The input is an int and is in range so is appened to
+                # the list returned by the function
+                input_list.append(input_str)
+                # The while loop can now be broken and the for loop
+                # proceeds to get input for the next item
+                break
+            else:
+                # The user is confirmed their int input and shown that
+                # negative numbers are not accepted
+                print(
+                    f"You entered {input_str}. Number must be 0 or greater\n"
+                )
 
     # Outside of the loop, show the final list of entered values for the
     # given program
