@@ -94,19 +94,64 @@ def get_stock_required(worksheet):
     return on_hand_ints
 
 
+def separate_items_by_program():
+    """
+    This function is designed to create separate subset lists for each
+    different bakery program. This allows for user input to be broken
+    down by category when entering stock on hand levels.
+    """
+    # Add global keyword access at the top of the function so the vars
+    # can be accessed from other functions
+    global DEFROSTS, APPLE_TURNOVERS, ROLLS_BAGUETTES, DANISH, CHEESE_ROLLS
+    global PASTRIES
+    # Get the item names from reference sheet
+    items = item_reference_sheet.col_values(1)
+    # print(items)
+    # Get the corresponding bakery program number
+    programs = item_reference_sheet.col_values(3)
+    # print(programs)
+    # Create a dictionary with zip method to create key: value pairs
+    items_by_prog = dict(zip(items, programs))
+    pprint(items_by_prog)
+    # List comprehensions of keys with program number conditional
+    # https://stackoverflow.com/questions/44664247/
+    # python-dictionary-how-to-get-all-keys-with-specific-values
+    # (Multi-line hyperlink)
+    DEFROSTS = [k for k, v in items_by_prog.items() if v == '0']
+    # pprint(f"Defrost program items are: {DEFROSTS}")
+    APPLE_TURNOVERS = [k for k, v in items_by_prog.items() if v == '1']
+    # pprint(f"Apple turnover program items are: {APPLE_TURNOVERS}")
+    ROLLS_BAGUETTES = [k for k, v in items_by_prog.items() if v == '2']
+    # pprint(f"Rolls/baguettes program items are: {ROLLS_BAGUETTES}")
+    DANISH = [k for k, v in items_by_prog.items() if v == '3']
+    # pprint(f"Danish program items are: {DANISH}")
+    CHEESE_ROLLS = [k for k, v in items_by_prog.items() if v == '4']
+    # pprint(f"Cheese rolls program items are: {CHEESE_ROLLS}")
+    PASTRIES = [k for k, v in items_by_prog.items() if v == '5']
+    # pprint(f"Pastry program items are: {PASTRIES}")
+
+
 def main():
     """
     This function calls the other functions in sequence as appropriate
     for program function.
     """
-    capt_date = (capture_date_input())
-    print(type(capt_date))
+    # capt_date = (capture_date_input())
+    # print(type(capt_date))
 
-    curr_worksheet = get_current_worksheet(capt_date)
-    print(curr_worksheet)
+    # curr_worksheet = get_current_worksheet(capt_date)
+    # print(curr_worksheet)
 
-    stock_req = get_stock_required(curr_worksheet)
-    print(stock_req)
+    # stock_req = get_stock_required(curr_worksheet)
+    # print(stock_req)
+
+    separate_items_by_program()
+    print(DEFROSTS)
+    print(APPLE_TURNOVERS)
+    print(ROLLS_BAGUETTES)
+    print(DANISH)
+    print(CHEESE_ROLLS)
+    print(PASTRIES)
 
 
 main()
