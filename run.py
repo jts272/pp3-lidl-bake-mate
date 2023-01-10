@@ -112,7 +112,7 @@ def separate_items_by_program():
     # print(programs)
     # Create a dictionary with zip method to create key: value pairs
     items_by_prog = dict(zip(items, programs))
-    pprint(items_by_prog)
+    # pprint(items_by_prog)
     # List comprehensions of keys with program number conditional
     # https://stackoverflow.com/questions/44664247/
     # python-dictionary-how-to-get-all-keys-with-specific-values
@@ -131,6 +131,34 @@ def separate_items_by_program():
     # pprint(f"Pastry program items are: {PASTRIES}")
 
 
+def get_stock_on_hand(program_items, program_name):
+    """
+    This is the function that take user input for the stock on hand.
+    Taking the program var as a parameter, it will loop through each
+    item in the given program and request the current quantity for the
+    user to enter.
+
+    The program name is provided as a string argument when called to
+    present the final values entered for the program clearly to the
+    user.
+    """
+    input_list = []
+    # Loop through each item in the given program and take input for the
+    # current number of items still on sale
+    for item in program_items:
+        print(f"Please input stock on hand for {item}:")
+        input_str = input("Current stock:")
+        print(f"You entered {input_str} units for {item}")
+        input_list.append(input_str)
+
+    # Outside of the loop, show the final list of entered values for the
+    # given program
+    print(f"Stock values provided for {program_name} were: {input_list}")
+    # Return the input list so that a full list for stock from all
+    # programs may be constructed
+    return input_list
+
+
 def main():
     """
     This function calls the other functions in sequence as appropriate
@@ -146,12 +174,20 @@ def main():
     # print(stock_req)
 
     separate_items_by_program()
-    print(DEFROSTS)
-    print(APPLE_TURNOVERS)
-    print(ROLLS_BAGUETTES)
-    print(DANISH)
-    print(CHEESE_ROLLS)
-    print(PASTRIES)
+    # print(DEFROSTS)
+    # print(APPLE_TURNOVERS)
+    # print(ROLLS_BAGUETTES)
+    # print(DANISH)
+    # print(CHEESE_ROLLS)
+    # print(PASTRIES)
+
+    # Create vars to hold the return values of the get stock on hand
+    # function, depending on which program arguments are provided
+    prog0_on_hand = get_stock_on_hand(DEFROSTS, 'defrosts')
+    prog1_on_hand = get_stock_on_hand(APPLE_TURNOVERS, 'apple_turnovers')
+
+    print(prog0_on_hand)
+    print(prog1_on_hand)
 
 
 main()
