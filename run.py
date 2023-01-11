@@ -244,6 +244,52 @@ def worksheet_update_stock(worksheet, stock_list):
     print(f"Stock on hand values for worksheet dated {worksheet} updated!")
 
 
+def calculate_items_to_bake(stock_required, stock_on_hand):
+    """
+    In this function, both the stock required and on hand for the day
+    are passed in to produce the final list of stock required to be
+    baked.
+
+    The stock on hand is subtracted from the stock required list to give
+    the user the figure required. Any instances of negative numbers will
+    be amended to 0 as the function is returning a quantity of items for
+    the baker to prepare.
+    """
+    # The following print statements report the values and lengths of
+    # their respective lists
+    print(f"Stock required list values:\n {stock_required}")
+    print(f"{len(stock_required)} items")
+    print(f"Stock on hand list values:\n {stock_on_hand}")
+    print(f"{len(stock_on_hand)} items")
+
+    # This var will receive the sum of the two lists, after negative
+    # ints have been set to 0
+    stock_to_bake = []
+    # vars are iterated through the zipped lists passed in as arguments
+    for required, on_hand in zip(stock_required, stock_on_hand):
+        # List var to hold each value after arithmetic operation
+        calculation = [(required - on_hand)]
+        print(calculation)
+        # Address each item in the calculation list and adjust any ints
+        # that are less than 0 to 0
+        # See: https://martinheinz.dev/blog/80
+        for i in calculation:
+            if i < 0:
+                i = 0
+            # Append to placeholder list only after conditional logic
+            stock_to_bake.append(i)
+
+    print(f"Required stock to bake: {stock_to_bake}")
+    print(f"{len(stock_to_bake)} items")
+
+
+TEST_REQ = [10, 20, 30]
+TEST_ON_HAND = [15, 10, 30]
+
+
+calculate_items_to_bake(TEST_REQ, TEST_ON_HAND)
+
+
 def main():
     """
     This function calls the other functions in sequence as appropriate
@@ -301,14 +347,7 @@ def main():
 
     worksheet_update_stock(curr_worksheet, stock_on_hand_final)
 
+    calculate_items_to_bake(stock_req, stock_on_hand_final)
 
-# TEST_LIST = [1, 2, 3]
 
-# TEST_LIST_OF_LISTS = [[i] for i in TEST_LIST]
-# print(TEST_LIST_OF_LISTS)
-
-# # worksheet_update_stock(wk52_thu_sheet, TEST_LIST)
-
-main()
-
-# wk52_thu_sheet.update('C2', TEST_LIST_OF_LISTS)
+# main()
