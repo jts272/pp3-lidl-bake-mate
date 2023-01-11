@@ -192,10 +192,29 @@ def get_stock_on_hand(program_items, program_name):
 
     # Outside of the loop, show the final list of entered values for the
     # given program
-    print(f"Stock values provided for {program_name} were: {input_list}")
+    print(f"Stock values provided for {program_name} were: {input_list}\n")
     # Return the input list so that a full list for stock from all
     # programs may be constructed
     return input_list
+
+
+def combine_program_lists(*programs):
+    """
+    This function takes an arbitrary number of lists and joins them
+    together. This will create the final stock on hand list that will be
+    sent to the worksheet and will also be used for calculating the
+    stock required to bake.
+    """
+    # Placeholder list that will be appended with each sub list
+    final_list = []
+    # Loop to address each program passed in at function call
+    for program in programs:
+        # Use extend method to place each sub list into on final list
+        # See: https://www.w3schools.com/python/python_lists_join.asp
+        final_list.extend(program)
+
+    # print(final_list)
+    return final_list
 
 
 def main():
@@ -224,9 +243,34 @@ def main():
     # function, depending on which program arguments are provided
     prog0_on_hand = get_stock_on_hand(DEFROSTS, 'defrosts')
     prog1_on_hand = get_stock_on_hand(APPLE_TURNOVERS, 'apple_turnovers')
+    prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'rolls/baguettes')
+    prog3_on_hand = get_stock_on_hand(DANISH, 'danish')
+    prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'cheese rolls')
+    prog5_on_hand = get_stock_on_hand(PASTRIES, 'pastries')
 
-    print(prog0_on_hand)
-    print(prog1_on_hand)
+    print("Input for all items by program:\n")
+    print(f"defrosts: {prog0_on_hand} ({len(prog0_on_hand)} items)")
+    print(f"apple turnovers: {prog1_on_hand} ({len(prog1_on_hand)} items)")
+    print(f"rolls/baguettes: {prog2_on_hand} ({len(prog2_on_hand)} items)")
+    print(f"danish: {prog3_on_hand} ({len(prog3_on_hand)} items)")
+    print(f"cheese rolls: {prog4_on_hand} ({len(prog4_on_hand)} items)")
+    print(f"pastries: {prog5_on_hand} ({len(prog5_on_hand)} items)\n")
+
+    print("Stock on hand input complete!\n")
+
+    # Call the function to join the sub lists together, passing in the
+    # vars created from each sub list input
+    stock_on_hand_final = combine_program_lists(
+        prog0_on_hand,
+        prog1_on_hand,
+        prog2_on_hand,
+        prog3_on_hand,
+        prog4_on_hand,
+        prog5_on_hand
+    )
+
+    print(f"Complete list of stock on hand:\n {stock_on_hand_final}")
+    print(f"Number of items counted: {len(stock_on_hand_final)}")
 
 
 main()
