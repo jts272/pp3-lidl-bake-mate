@@ -217,12 +217,13 @@ def combine_program_lists(*programs):
     return final_list
 
 
-def worksheet_update_stock(worksheet, stock_list):
+def worksheet_update_cols(worksheet, stock_list, cell_col_start):
     """
     This function updates the API worksheet.
 
     Arguments passed in are the worksheet to be updated and with which
-    list.
+    list. The worksheet cell to start updating the column from is
+    passed in as a string.
 
     The var for the worksheet is captured in the first function in which
     the user enters the date.
@@ -240,7 +241,7 @@ def worksheet_update_stock(worksheet, stock_list):
     print(f"Sending stock on hand values to worksheet dated {worksheet}")
     # This update method specifies the cell to start updating the col
     # from and the var containing the list of list values
-    worksheet.update("C2", list_to_sheet)
+    worksheet.update(cell_col_start, list_to_sheet)
     print(f"Stock on hand values for worksheet dated {worksheet} updated!")
 
 
@@ -345,9 +346,9 @@ def main():
     print(f"Complete list of stock on hand:\n {stock_on_hand_final}")
     print(f"Number of items counted: {len(stock_on_hand_final)}")
 
-    worksheet_update_stock(curr_worksheet, stock_on_hand_final)
+    worksheet_update_cols(curr_worksheet, stock_on_hand_final, "C2")
 
     calculate_items_to_bake(stock_req, stock_on_hand_final)
 
 
-# main()
+main()
