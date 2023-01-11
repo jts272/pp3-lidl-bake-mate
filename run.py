@@ -34,7 +34,7 @@ SHEET = GSPREAD_CLIENT.open("lidl_bake_wk_52")
 # vars to reference the individual worksheets of the full spreadsheet
 # wk52_tue_sheet = SHEET.worksheet("27-12-22")
 # wk52_wed_sheet = SHEET.worksheet("28-12-22")
-# wk52_thu_sheet = SHEET.worksheet("29-12-22")
+wk52_thu_sheet = SHEET.worksheet("29-12-22")
 item_reference_sheet = SHEET.worksheet("item-reference")
 
 # vars containing the data of the specified sheet in list format
@@ -217,18 +217,45 @@ def combine_program_lists(*programs):
     return final_list
 
 
+def worksheet_update_stock(worksheet, stock_list):
+    """
+    This function updates the API worksheet.
+
+    Arguments passed in are the worksheet to be updated and with which
+    list.
+
+    The var for the worksheet is captured in the first function in which
+    the user enters the date.
+
+    The gspread update method requires the data to be inserted to be a
+    list of lists. Any list passed to the function must be broken down
+    such that each item in the list is a list item.
+    """
+    # List comprehension to convert the list passed into the function
+    # into a list of lists
+    # See: https://stackoverflow.com/questions/38604805/
+    # convert-list-into-list-of-lists
+    # (Multi-line hyperlink)
+    list_to_sheet = [[i] for i in stock_list]
+    print(f"Sending stock on hand values to worksheet dated {worksheet}")
+    # This update method specifies the cell to start updating the col
+    # from and the var containing the list of list values
+    worksheet.update("C2", list_to_sheet)
+    print(f"Stock on hand values for worksheet dated {worksheet} updated!")
+
+
 def main():
     """
     This function calls the other functions in sequence as appropriate
     for program function.
     """
-    # capt_date = (capture_date_input())
+    capt_date = (capture_date_input())
     # print(type(capt_date))
 
-    # curr_worksheet = get_current_worksheet(capt_date)
+    curr_worksheet = get_current_worksheet(capt_date)
     # print(curr_worksheet)
 
-    # stock_req = get_stock_required(curr_worksheet)
+    stock_req = get_stock_required(curr_worksheet)
     # print(stock_req)
 
     separate_items_by_program()
@@ -272,5 +299,16 @@ def main():
     print(f"Complete list of stock on hand:\n {stock_on_hand_final}")
     print(f"Number of items counted: {len(stock_on_hand_final)}")
 
+    worksheet_update_stock(curr_worksheet, stock_on_hand_final)
+
+
+# TEST_LIST = [1, 2, 3]
+
+# TEST_LIST_OF_LISTS = [[i] for i in TEST_LIST]
+# print(TEST_LIST_OF_LISTS)
+
+# # worksheet_update_stock(wk52_thu_sheet, TEST_LIST)
 
 main()
+
+# wk52_thu_sheet.update('C2', TEST_LIST_OF_LISTS)
