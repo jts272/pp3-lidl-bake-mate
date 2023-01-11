@@ -238,11 +238,11 @@ def worksheet_update_cols(worksheet, stock_list, cell_col_start):
     # convert-list-into-list-of-lists
     # (Multi-line hyperlink)
     list_to_sheet = [[i] for i in stock_list]
-    print(f"Sending stock on hand values to worksheet dated {worksheet}")
+    print(f"Sending values to worksheet dated {worksheet}")
     # This update method specifies the cell to start updating the col
     # from and the var containing the list of list values
     worksheet.update(cell_col_start, list_to_sheet)
-    print(f"Stock on hand values for worksheet dated {worksheet} updated!")
+    print(f"Values for worksheet dated {worksheet} updated!")
 
 
 def calculate_items_to_bake(stock_required, stock_on_hand):
@@ -270,7 +270,7 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     for required, on_hand in zip(stock_required, stock_on_hand):
         # List var to hold each value after arithmetic operation
         calculation = [(required - on_hand)]
-        print(calculation)
+        # print(calculation)
         # Address each item in the calculation list and adjust any ints
         # that are less than 0 to 0
         # See: https://martinheinz.dev/blog/80
@@ -283,12 +283,7 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     print(f"Required stock to bake: {stock_to_bake}")
     print(f"{len(stock_to_bake)} items")
 
-
-TEST_REQ = [10, 20, 30]
-TEST_ON_HAND = [15, 10, 30]
-
-
-calculate_items_to_bake(TEST_REQ, TEST_ON_HAND)
+    return stock_to_bake
 
 
 def main():
@@ -346,9 +341,14 @@ def main():
     print(f"Complete list of stock on hand:\n {stock_on_hand_final}")
     print(f"Number of items counted: {len(stock_on_hand_final)}")
 
+    # Update the worksheet stock on hand column
     worksheet_update_cols(curr_worksheet, stock_on_hand_final, "C2")
 
-    calculate_items_to_bake(stock_req, stock_on_hand_final)
+    # var to store the actual number of items for the baker to prepare
+    stock_to_bake = calculate_items_to_bake(stock_req, stock_on_hand_final)
+
+    # Update the worksheet stock to bake column
+    worksheet_update_cols(curr_worksheet, stock_to_bake, "D2")
 
 
 main()
