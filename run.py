@@ -52,45 +52,36 @@ item_reference_dict = item_reference_sheet.get_all_records()
 # pprint(item_reference_dict)
 
 
-# def capture_date_input():
-#     """
-#     This function takes user input for the current date as a string.
-#     The output is passed as an argument to the function to get the
-#     current day's worksheet.
-#     """
-#     date_input = input(
-#         "Please input today's date in the format DD-MM-YY:\n")
-#     print(f"You entered {date_input}, which is a {type(date_input)}")
-#     return date_input
-
-
-# def get_current_worksheet(date):
-#     """
-#     This function takes the captured date as an argument to select the
-#     appropriate worksheet.
-#     """
-#     current_worksheet = SHEET.worksheet(date)
-#     # pprint(current_worksheet.get_all_values())
-#     return current_worksheet
-
-
 def get_worksheet_from_input():
     """
-    Get input
-    check if sheet is there
-    return if true
-    repeat input check if false
+    This function asks the user to input the date. This input is
+    returned from the function and used as an argument so the rest of
+    the program knows which worksheet to address.
     """
+    # Begin loop that is looking for a date that is contained in the
+    # base spreadsheet
     while True:
         try:
+            # This input is asking the user to input the date for the
+            # sheet they wish to access. This matches up with the title
+            # of the worksheet from the base spreadsheet
             user_date = input("Input date as DD-MM-YY:")
             worksheet = SHEET.worksheet(user_date)
-            print(worksheet)
+            # print(worksheet)
+            # Loop is broken if the user provides a date that matches
+            # with an available worksheet
             break
         except gspread.exceptions.WorksheetNotFound:
+            # Using gspread's built in exception, the user is informed
+            # that this sheet is unavailable if it is not found in the
+            # base spreadsheet
             print("Worksheet not found")
+            # continue statment returns to the top of the loop so the
+            # user can try again with their date input
             continue
 
+    # Outside of the loop, the function returns the input string so that
+    # it may be passed into other functions as an argument
     return worksheet
 
 
@@ -312,12 +303,7 @@ def main():
     This function calls the other functions in sequence as appropriate
     for program function.
     """
-    # capt_date = (capture_date_input())
-    # print(type(capt_date))
-
-    # curr_worksheet = get_current_worksheet(capt_date)
-
-    curr_worksheet = get_worksheet_from_input()  # <-- NEW FUNCTION
+    curr_worksheet = get_worksheet_from_input()
     # print(curr_worksheet)
 
     stock_req = get_stock_required(curr_worksheet)
@@ -375,60 +361,3 @@ def main():
 
 
 main()
-
-# def get_worksheet_list():
-#     """
-#     This function gets the
-#     """
-#     avail_worksheets = SHEET.worksheets()
-#     print(avail_worksheets)
-
-
-# get_worksheet_list()
-
-# def get_worksheet_by_name(worksheet_title):
-#     """
-#     Gets the worksheet by user inputted name (date in string format that
-#     matches the Google Sheet worksheet title)
-#     """
-#     try:
-#         worksheet = SHEET.worksheet(worksheet_title)
-#         print(worksheet)
-#     except gspread.exceptions.WorksheetNotFound:
-#         print(f"No sheet available for {worksheet_title}")
-#         capture_date_input()
-
-
-# def input_date():
-#     date_input = input("Enter date:")
-#     print(f"input was {date_input}, type was {type(date_input)}")
-#     return date_input
-
-
-# def show_input_date(user_input):
-#     print(user_input)
-
-
-# def get_ws_from_input(user_input):
-#     while True:
-
-#         try:
-#             ws = SHEET.worksheet(user_input)
-#             print(ws)
-#             break
-#         except gspread.exceptions.WorksheetNotFound:
-#             print("ws not found")
-#             continue
-
-
-# inputted_date = input_date()
-# show_input_date(inputted_date)
-# get_ws_from_input(inputted_date)
-
-# captured_date = capture_date_input()
-# show_input_date(captured_date)
-# get_worksheet_by_name(captured_date)
-# get_ws_from_input(captured_date)
-
-
-# get_worksheet_from_input()
