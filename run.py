@@ -58,6 +58,10 @@ def get_worksheet_from_input():
     returned from the function and used as an argument so the rest of
     the program knows which worksheet to address.
     """
+    # This var is referenced when the user enters the wrong date to
+    # access the worksheet. This references the last worksheet from the
+    # base spreadsheet by index
+    latest_sheet = SHEET.get_worksheet(-1)
     # Begin loop that is looking for a date that is contained in the
     # base spreadsheet
     while True:
@@ -65,7 +69,9 @@ def get_worksheet_from_input():
             # This input is asking the user to input the date for the
             # sheet they wish to access. This matches up with the title
             # of the worksheet from the base spreadsheet
-            user_date = input("Input date as DD-MM-YY:")
+            user_date = input(
+                "Please enter the date as DD-MM-YY to select your bake plan:\n"
+            )
             worksheet = SHEET.worksheet(user_date)
             # print(worksheet)
             # Loop is broken if the user provides a date that matches
@@ -75,7 +81,13 @@ def get_worksheet_from_input():
             # Using gspread's built in exception, the user is informed
             # that this sheet is unavailable if it is not found in the
             # base spreadsheet
-            print("Worksheet not found")
+            print(f"No plan was found for '{user_date}'")
+            # The user is informed of the title of the most recent sheet
+            # from the base spreadsheet to guide their next input
+            print(f"The most recent plan available is {latest_sheet}")
+            print(
+                "Please enter the date of the most recent sheet to continue\n"
+            )
             # continue statment returns to the top of the loop so the
             # user can try again with their date input
             continue
@@ -361,3 +373,11 @@ def main():
 
 
 main()
+
+
+def get_newest_worksheet():
+    latest_sheet = SHEET.get_worksheet(-2)
+    print(latest_sheet)
+
+
+# get_newest_worksheet()
