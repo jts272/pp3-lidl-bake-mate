@@ -187,56 +187,83 @@ def get_stock_on_hand(program_items, program_name):
     user.
     """
     input_list = []
-    # Loop through each item in the given program and take input for the
-    # current number of items still on sale
-    for item in program_items:
-        # Credit to this blog for error handling structure on input:
-        # https://bobbyhadz.com/blog/python-while-loop-user-input
-        # Create a while loop so that the current iteration of the
-        # parent for loop will run until input is valid
-        while True:
-            # The try block executes and looks to catch errors from the
-            # user's input if it is not an int value
-            try:
-                print(f"Please input stock on hand for {item}:\n")
-                # This var specifies that the user's input must be of
-                # int type, which works with the following except
-                # statement
-                input_str = int((input("Current stock:")))
-            # The except block runs when the user does not enter an int
-            except ValueError:
-                # This message displays when the exception is caught and
-                # notifies the user of the correct type of input needed
-                print(
-                    "Please enter a number of 0 or higher when recording stock"
-                    "\n"
-                )
-                # continue kw used to repeat the while loop so the user
-                # can try a different value for the current item's stock
-                # level
-                continue
-            # The following if else statments work when the user
-            # provides an int, then checks that it was in the valid
-            # range of 0 or above
-            if input_str >= 0:
-                # The user's input is confirmed
-                print(f"You entered {input_str} units for {item}\n")
-                # The input is an int and is in range so is appened to
-                # the list returned by the function
-                input_list.append(input_str)
-                # The while loop can now be broken and the for loop
-                # proceeds to get input for the next item
-                break
-            else:
-                # The user is confirmed their int input and shown that
-                # negative numbers are not accepted
-                print(
-                    f"You entered {input_str}. Number must be 0 or greater\n"
-                )
+    while True:
+        # Loop through each item in the given program and take input for
+        # the current number of items still on sale
+        for item in program_items:
+            # Credit to this blog for error handling structure on input:
+            # https://bobbyhadz.com/blog/python-while-loop-user-input
+            # Create a while loop so that the current iteration of the
+            # parent for loop will run until input is valid
+            while True:
+                # The try block executes and looks to catch errors from
+                # the user's input if it is not an int value
+                try:
+                    print(f"Item group: {program_name}\n")
+                    print(f"Please input stock on hand for {item}:\n")
+                    # This var specifies that the user's input must be
+                    # of int type, which works with the following except
+                    # statement
+                    input_str = int((input("Current stock:")))
+                # The except block runs when the user does not enter an
+                # int
+                except ValueError:
+                    # This message displays when the exception is caught
+                    # and notifies the user of the correct type of input
+                    # needed
+                    print(
+                        "Please enter a number of 0 or higher when recording "
+                        "stock\n"
+                    )
+                    # continue kw used to repeat the while loop so the
+                    # user can try a different value for the current
+                    # item's stock level
+                    continue
+                # The following if else statments work when the user
+                # provides an int, then checks that it was in the valid
+                # range of 0 or above
+                if input_str >= 0:
+                    # The user's input is confirmed
+                    print(f"You entered {input_str} units for {item}\n")
+                    # The input is an int and is in range so is appened
+                    # to the list returned by the function
+                    input_list.append(input_str)
+                    # The while loop can now be broken and the for loop
+                    # proceeds to get input for the next item
+                    break
+                else:
+                    # The user is confirmed their int input and shown
+                    # that negative numbers are not accepted
+                    print(
+                        f"You entered {input_str}. Number must be 0 or greater"
+                        "\n"
+                    )
 
-    # Outside of the loop, show the final list of entered values for the
-    # given program
-    print(f"Stock values provided for {program_name} were: {input_list}\n")
+        # Show the final list of entered values for the given program
+        print(f"Stock values provided for {program_name} were: {input_list}\n")
+        # Get input at the end of the loop for the user to confirm if
+        # their list values are correct
+        # See: https://bobbyhadz.com/blog/python-input-yes-no-loop
+        user_input = input("Confirm values are correct? Please enter y or n\n")
+
+        if user_input.lower() == 'y':
+            print(f"Values submitted for {program_name}\n")
+            # Exit loop when user confirms their values are correct
+            break
+        elif user_input.lower() == 'n':
+            print(f"Re-enter values for {program_name}\n")
+            # Clear the list on restart to keep correct number of values
+            input_list.clear()
+            continue
+        else:
+            # Catch-all statement similar to if the user selects 'n' so
+            # that the user only submits data they are sure is correct
+            print(
+                f"Input not recognized - please re-enter values for "
+                f"{program_name}\n")
+            input_list.clear()
+            continue
+
     # Return the input list so that a full list for stock from all
     # programs may be constructed
     return input_list
@@ -282,11 +309,11 @@ def worksheet_update_cols(worksheet, stock_list, cell_col_start):
     # convert-list-into-list-of-lists
     # (Multi-line hyperlink)
     list_to_sheet = [[i] for i in stock_list]
-    print(f"Sending values to worksheet dated {worksheet}")
+    print(f"Sending values to worksheet dated {worksheet}\n")
     # This update method specifies the cell to start updating the col
     # from and the var containing the list of list values
     worksheet.update(cell_col_start, list_to_sheet)
-    print(f"Values for worksheet dated {worksheet} updated!")
+    print(f"Values for worksheet dated {worksheet} updated!\n")
 
 
 def calculate_items_to_bake(stock_required, stock_on_hand):
@@ -302,9 +329,9 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     """
     # The following print statements report the values and lengths of
     # their respective lists
-    print(f"Stock required list values:\n {stock_required}")
+    print(f"Stock required list values:\n {stock_required}\n")
     print(f"{len(stock_required)} items")
-    print(f"Stock on hand list values:\n {stock_on_hand}")
+    print(f"Stock on hand list values:\n {stock_on_hand}\n")
     print(f"{len(stock_on_hand)} items")
 
     # This var will receive the sum of the two lists, after negative
@@ -324,7 +351,7 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
             # Append to placeholder list only after conditional logic
             stock_to_bake.append(i)
 
-    print(f"Required stock to bake: {stock_to_bake}")
+    print(f"Required stock to bake: {stock_to_bake}\n")
     print(f"{len(stock_to_bake)} items")
 
     return stock_to_bake
@@ -351,20 +378,20 @@ def main():
 
     # Create vars to hold the return values of the get stock on hand
     # function, depending on which program arguments are provided
-    prog0_on_hand = get_stock_on_hand(DEFROSTS, 'defrosts')
-    prog1_on_hand = get_stock_on_hand(APPLE_TURNOVERS, 'apple_turnovers')
-    prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'rolls/baguettes')
-    prog3_on_hand = get_stock_on_hand(DANISH, 'danish')
-    prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'cheese rolls')
-    prog5_on_hand = get_stock_on_hand(PASTRIES, 'pastries')
+    prog0_on_hand = get_stock_on_hand(DEFROSTS, 'Defrosts')
+    prog1_on_hand = get_stock_on_hand(APPLE_TURNOVERS, 'Apple Turnovers')
+    prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'Rolls/Baguettes')
+    prog3_on_hand = get_stock_on_hand(DANISH, 'Danish')
+    prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
+    prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
 
     print("Input for all items by program:\n")
-    print(f"defrosts: {prog0_on_hand} ({len(prog0_on_hand)} items)")
-    print(f"apple turnovers: {prog1_on_hand} ({len(prog1_on_hand)} items)")
-    print(f"rolls/baguettes: {prog2_on_hand} ({len(prog2_on_hand)} items)")
-    print(f"danish: {prog3_on_hand} ({len(prog3_on_hand)} items)")
-    print(f"cheese rolls: {prog4_on_hand} ({len(prog4_on_hand)} items)")
-    print(f"pastries: {prog5_on_hand} ({len(prog5_on_hand)} items)\n")
+    print(f"Defrosts: {prog0_on_hand} ({len(prog0_on_hand)} items)")
+    print(f"Apple Turnovers: {prog1_on_hand} ({len(prog1_on_hand)} items)")
+    print(f"Rolls/Baguettes: {prog2_on_hand} ({len(prog2_on_hand)} items)")
+    print(f"Danish: {prog3_on_hand} ({len(prog3_on_hand)} items)")
+    print(f"Cheese Rolls: {prog4_on_hand} ({len(prog4_on_hand)} items)")
+    print(f"Pastries: {prog5_on_hand} ({len(prog5_on_hand)} items)\n")
 
     print("Stock on hand input complete!\n")
 
@@ -379,8 +406,8 @@ def main():
         prog5_on_hand
     )
 
-    print(f"Complete list of stock on hand:\n {stock_on_hand_final}")
-    print(f"Number of items counted: {len(stock_on_hand_final)}")
+    print(f"Complete list of stock on hand:\n {stock_on_hand_final}\n")
+    print(f"Number of items counted: {len(stock_on_hand_final)}\n")
 
     # Update the worksheet stock on hand column
     worksheet_update_cols(curr_worksheet, stock_on_hand_final, "C2")
@@ -390,6 +417,8 @@ def main():
 
     # Update the worksheet stock to bake column
     worksheet_update_cols(curr_worksheet, stock_to_bake, "D2")
+
+    print("Data entry complete!\n")
 
 
 main()
