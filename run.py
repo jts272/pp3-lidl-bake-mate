@@ -7,11 +7,13 @@
 from pprint import pprint
 # DictReader is used to construct data structures from csv files
 # from csv import DictReader
-# gspread and google-auth installed via pip3 install command
+# gspread, google-auth and numpy installed via pip3 install command
 # gspread library used for google sheets integration
 import gspread
 # Only Credentials class imported from google-auth for authorization
 from google.oauth2.service_account import Credentials
+# numpy is used for its list concatenating method
+import numpy as np
 
 
 # Set scope for Google IAM authentication for the APIs the program has
@@ -29,7 +31,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 # const to authorize the gspread client with these scoped credentials
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # const to hold the full spreadsheet
-SHEET = GSPREAD_CLIENT.open("lidl_bake_wk_52")
+SHEET = GSPREAD_CLIENT.open("lidl_bake_wk_52-2022")
 
 # vars to reference the individual worksheets of the full spreadsheet
 # wk52_tue_sheet = SHEET.worksheet("27-12-22")
@@ -44,6 +46,10 @@ item_reference_sheet = SHEET.worksheet("item-reference")
 item_reference_data = item_reference_sheet.get_all_values()
 item_reference_dict = item_reference_sheet.get_all_records()
 
+# print(item_reference_dict.pop(2))
+
+# ITEM_NAMES_LIST = item_reference_sheet.get("A2:A37")
+# print(ITEM_NAMES_LIST)
 # print to test API function
 # print(wk52_tue_data)
 # print(wk52_wed_data)
@@ -357,6 +363,37 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     return stock_to_bake
 
 
+def present_bake_requirements(list_for_baker):
+    """
+    This function is designed to present to the user the final list of
+    items to prepare in the bakery in the terminal, using the final
+    calculated stock list.
+    """
+    # Get the names of all bakery items from the item reference sheet by
+    # A1 notation. Note that gspread returns this as a list of lists
+    item_name_list = item_reference_sheet.get("A2:A37")
+
+    # By using numpy's concatenate method in creating a single list of
+    # ints, this is acheived in one line of code
+    flat_item_name_list = list(np.concatenate(item_name_list))
+
+    # Create the zipped dict from item names and list arg
+    to_bake_dict = dict(zip(flat_item_name_list, list_for_baker))
+
+    # This dict comprehension adds key: value pairs to the final list
+    # on the condition that they are not asking for 0 items to be baked
+    # See example 4 in the link below:
+    # https://www.programiz.com/python-programming/
+    # dictionary-comprehension
+    # (Multi-line hyperlink)
+    final_bake_dict = {k: v for (k, v) in to_bake_dict.items() if v != 0}
+    print("Full list of items required for baking:\n")
+    # Pretty-print the dict for legibility in the terminal
+    pprint(final_bake_dict)
+    print()
+    print("Thank you for using Lidl BakeMate! End of program.\n")
+
+
 def main():
     """
     This function calls the other functions in sequence as appropriate
@@ -385,13 +422,13 @@ def main():
     prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
     prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
 
-    print("Input for all items by program:\n")
-    print(f"Defrosts: {prog0_on_hand} ({len(prog0_on_hand)} items)")
-    print(f"Apple Turnovers: {prog1_on_hand} ({len(prog1_on_hand)} items)")
-    print(f"Rolls/Baguettes: {prog2_on_hand} ({len(prog2_on_hand)} items)")
-    print(f"Danish: {prog3_on_hand} ({len(prog3_on_hand)} items)")
-    print(f"Cheese Rolls: {prog4_on_hand} ({len(prog4_on_hand)} items)")
-    print(f"Pastries: {prog5_on_hand} ({len(prog5_on_hand)} items)\n")
+    # print("Input for all items by program:\n")
+    # print(f"Defrosts: {prog0_on_hand} ({len(prog0_on_hand)} items)")
+    # print(f"Apple Turnovers: {prog1_on_hand} ({len(prog1_on_hand)} items)")
+    # print(f"Rolls/Baguettes: {prog2_on_hand} ({len(prog2_on_hand)} items)")
+    # print(f"Danish: {prog3_on_hand} ({len(prog3_on_hand)} items)")
+    # print(f"Cheese Rolls: {prog4_on_hand} ({len(prog4_on_hand)} items)")
+    # print(f"Pastries: {prog5_on_hand} ({len(prog5_on_hand)} items)\n")
 
     print("Stock on hand input complete!\n")
 
@@ -419,6 +456,8 @@ def main():
     worksheet_update_cols(curr_worksheet, stock_to_bake, "D2")
 
     print("Data entry complete!\n")
+
+    present_bake_requirements(stock_to_bake)
 
 
 main()
