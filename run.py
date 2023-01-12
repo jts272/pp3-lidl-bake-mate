@@ -57,11 +57,16 @@ def get_worksheet_from_input():
     This function asks the user to input the date. This input is
     returned from the function and used as an argument so the rest of
     the program knows which worksheet to address.
+
+    Checks are performed for the presence and value of the input to
+    guide the user to selecting the necessary sheet for the day.
     """
     # This var is referenced when the user enters the wrong date to
     # access the worksheet. This references the last worksheet from the
     # base spreadsheet by index
-    latest_sheet = SHEET.get_worksheet(-1)
+    latest_sheet_ref = SHEET.get_worksheet(-1)
+    # var to access the actual title of the referenced sheet
+    latest_sheet_title = latest_sheet_ref.title
     # Begin loop that is looking for a date that is contained in the
     # base spreadsheet
     while True:
@@ -72,10 +77,21 @@ def get_worksheet_from_input():
             user_date = input(
                 "Please enter the date as DD-MM-YY to select your bake plan:\n"
             )
+            # var to reference the worksheet named by user's input
             worksheet = SHEET.worksheet(user_date)
+            # var to access the actual title of the
+            worksheet_title = worksheet.title
             # print(worksheet)
+            # print(f"{latest_sheet_title} : {type(latest_sheet_title)}")
+            # print(f"{worksheet_title} : {type(worksheet_title)}")
+            # If the input is valid, but not the latest sheet to be
+            # completed, inform the user and repeat the input operation
+            if worksheet_title != latest_sheet_title:
+                print(f"The plan for {worksheet_title} is already complete!")
+                print(f"Please enter {latest_sheet_title} to continue\n")
+                continue
             # Loop is broken if the user provides a date that matches
-            # with an available worksheet
+            # with the correct worksheet for the day
             break
         except gspread.exceptions.WorksheetNotFound:
             # Using gspread's built in exception, the user is informed
@@ -84,14 +100,18 @@ def get_worksheet_from_input():
             print(f"No plan was found for '{user_date}'")
             # The user is informed of the title of the most recent sheet
             # from the base spreadsheet to guide their next input
-            print(f"The most recent plan available is {latest_sheet}")
             print(
-                "Please enter the date of the most recent sheet to continue\n"
-            )
+                f"The most recent plan available is for {latest_sheet_title}")
+            print(f"Please enter {latest_sheet_title} to continue\n")
             # continue statment returns to the top of the loop so the
             # user can try again with their date input
             continue
 
+    # Confirm to the user that their input selected the correct sheet
+    # and that stock level entry will be required next
+    print("Bake plan is available")
+    print(f"Accessing bake plan for {worksheet_title}...\n")
+    print("Please enter current stock levels for the following lines:\n")
     # Outside of the loop, the function returns the input string so that
     # it may be passed into other functions as an argument
     return worksheet
@@ -373,11 +393,3 @@ def main():
 
 
 main()
-
-
-def get_newest_worksheet():
-    latest_sheet = SHEET.get_worksheet(-2)
-    print(latest_sheet)
-
-
-# get_newest_worksheet()
