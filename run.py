@@ -43,6 +43,56 @@ LATEST_SHEET_REF = SHEET.get_worksheet(-1)
 LATEST_SHEET_TITLE = LATEST_SHEET_REF.title
 
 
+def run_intro():
+    """
+    This function introduces the user to the application and notifies
+    them of program scope.
+    """
+    # Print statement show necessary information to the user for program
+    # operation. Dividing lines aid visual clarity
+    print("<=======================================================>\n")
+    print("Welcome to Lidl BakeMate!\n")
+    print(
+        "This program will efficiently calculate your afternoon bakery "
+        "requirements\n")
+    print(
+        "Simply enter the date and BakeMate will guide you through the "
+        "input process\n")
+    print(
+        "BakeMate will ask you to provide you current stock on hand values "
+        "for each line in the bakery. Input is broken down by bakery section. "
+        "You will have the chance to review your figures entered before "
+        "moving to the next section.\n")
+    print(
+        "When all programs are confirmed, your figures will be sent to the "
+        "database. You will be provided with a list of lines required to bake "
+        "at the end of the program.\n")
+    print(
+        "The full database can be accessed at the following address if "
+        "required:")
+    print("shorturl.at/pqrS3\n")
+    print("Full documentation for program use can be found here:")
+    print("https://github.com/jts272/pp3-lidl-bake-mate\n")
+    print(
+        "This program is not endorsed or affiliated with Lidl GB and is "
+        "presented for educational purposes.\n")
+    print("Coded by Joseph Smith (c) 2023\n")
+    print("<=======================================================>\n")
+
+    # Loop awaits user input to confirm they are ready to use the
+    # program
+    while True:
+        user_input = input(
+            "Please enter 'Y' when you are ready to start using BakeMate!\n")
+        if user_input.lower() == 'y':
+            break
+        else:
+            print("Input not recognized!\n")
+            continue
+
+    print("<========================================================\n")
+
+
 def get_worksheet_from_input():
     """
     This function asks the user to input the date. This input is
@@ -373,56 +423,6 @@ def present_bake_requirements(list_for_baker):
     print("Thank you for using Lidl BakeMate! End of program.\n")
 
 
-def run_intro():
-    """
-    This function introduces the user to the application and notifies
-    them of program scope.
-    """
-    # Print statement show necessary information to the user for program
-    # operation. Dividing lines aid visual clarity
-    print("<=======================================================>\n")
-    print("Welcome to Lidl BakeMate!\n")
-    print(
-        "This program will efficiently calculate your afternoon bakery "
-        "requirements\n")
-    print(
-        "Simply enter the date and BakeMate will guide you through the "
-        "input process\n")
-    print(
-        "BakeMate will ask you to provide you current stock on hand values "
-        "for each line in the bakery. Input is broken down by bakery section. "
-        "You will have the chance to review your figures entered before "
-        "moving to the next section.\n")
-    print(
-        "When all programs are confirmed, your figures will be sent to the "
-        "database. You will be provided with a list of lines required to bake "
-        "at the end of the program.\n")
-    print(
-        "The full database can be accessed at the following address if "
-        "required:")
-    print("shorturl.at/pqrS3\n")
-    print("Full documentation for program use can be found here:")
-    print("https://github.com/jts272/pp3-lidl-bake-mate\n")
-    print(
-        "This program is not endorsed or affiliated with Lidl GB and is "
-        "presented for educational purposes.\n")
-    print("Coded by Joseph Smith (c) 2023\n")
-    print("<=======================================================>\n")
-
-    # Loop awaits user input to confirm they are ready to use the
-    # program
-    while True:
-        user_input = input(
-            "Please enter 'Y' when you are ready to start using BakeMate!\n")
-        if user_input.lower() == 'y':
-            break
-        else:
-            print("Input not recognized!\n")
-            continue
-
-    print("<========================================================\n")
-
-
 def main():
     """
     This function calls the other functions in sequence as appropriate
@@ -483,4 +483,5 @@ def main():
     present_bake_requirements(stock_to_bake)
 
 
+# Call main function to start the program
 main()
