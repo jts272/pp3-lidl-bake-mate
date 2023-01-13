@@ -37,6 +37,11 @@ ITEM_REFERENCE_SHEET = SHEET.worksheet("item-reference")
 # items so numpy is used to flatten the list for future use
 ITEM_ALL_NAMES = list(np.concatenate(ITEM_REFERENCE_SHEET.get(("A2:A37"))))
 
+# const to reference the most recent worksheet by index
+LATEST_SHEET_REF = SHEET.get_worksheet(-1)
+# const to reference the title of the most recent sheet
+LATEST_SHEET_TITLE = LATEST_SHEET_REF.title
+
 
 def get_worksheet_from_input():
     """
@@ -47,12 +52,6 @@ def get_worksheet_from_input():
     Checks are performed for the presence and value of the input to
     guide the user to selecting the necessary sheet for the day.
     """
-    # This var is referenced when the user enters the wrong date to
-    # access the worksheet. This references the last worksheet from the
-    # base spreadsheet by index
-    latest_sheet_ref = SHEET.get_worksheet(-1)
-    # var to access the actual title of the referenced sheet
-    latest_sheet_title = latest_sheet_ref.title
     # Begin loop that is looking for a date that is contained in the
     # base spreadsheet
     while True:
@@ -67,14 +66,11 @@ def get_worksheet_from_input():
             worksheet = SHEET.worksheet(user_date)
             # var to access the actual title of the
             worksheet_title = worksheet.title
-            # print(worksheet)
-            # print(f"{latest_sheet_title} : {type(latest_sheet_title)}")
-            # print(f"{worksheet_title} : {type(worksheet_title)}")
             # If the input is valid, but not the latest sheet to be
             # completed, inform the user and repeat the input operation
-            if worksheet_title != latest_sheet_title:
+            if worksheet_title != LATEST_SHEET_TITLE:
                 print(f"The plan for {worksheet_title} is already complete!")
-                print(f"Please enter {latest_sheet_title} to continue\n")
+                print(f"Please enter {LATEST_SHEET_TITLE} to continue\n")
                 continue
             # Loop is broken if the user provides a date that matches
             # with the correct worksheet for the day
@@ -87,8 +83,8 @@ def get_worksheet_from_input():
             # The user is informed of the title of the most recent sheet
             # from the base spreadsheet to guide their next input
             print(
-                f"The most recent plan available is for {latest_sheet_title}")
-            print(f"Please enter {latest_sheet_title} to continue\n")
+                f"The most recent plan available is for {LATEST_SHEET_TITLE}")
+            print(f"Please enter {LATEST_SHEET_TITLE} to continue\n")
             # continue statment returns to the top of the loop so the
             # user can try again with their date input
             continue
