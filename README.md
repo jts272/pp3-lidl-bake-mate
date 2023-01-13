@@ -1,3 +1,7 @@
+Live link - [Heroku](https://pp3-lidl-bake-mate.herokuapp.com/)
+
+Accompanying spreadsheet - [Google Sheets](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome jts272,

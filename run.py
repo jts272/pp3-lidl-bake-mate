@@ -287,7 +287,7 @@ def get_stock_on_hand(program_items, program_name):
             # Exit loop when user confirms their values are correct
             break
         elif user_input.lower() == 'n':
-            print(f"Please re-enter values for {program_name}\n")
+            print(f"Please re-enter values for the {program_name} program\n")
             # Clear the list on restart to keep correct number of values
             input_list.clear()
             continue
