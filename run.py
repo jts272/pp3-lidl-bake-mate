@@ -281,12 +281,14 @@ def combine_program_lists(*programs):
     return final_list
 
 
-def worksheet_update_cols(worksheet, stock_list, cell_col_start):
+def worksheet_update_cols(worksheet, stock_list, col_name, cell_col_start):
     """
     This function updates the API worksheet.
 
     Arguments passed in are the worksheet to be updated and with which
-    list. The worksheet cell to start updating the column from is
+    list. As the function is to be used for updating different cols, a
+    param is included to pass in the name of the col being updated as a 
+    string The worksheet cell to start updating the column from is also
     passed in as a string.
 
     The var for the worksheet is captured in the first function in which
@@ -302,11 +304,17 @@ def worksheet_update_cols(worksheet, stock_list, cell_col_start):
     # convert-list-into-list-of-lists
     # (Multi-line hyperlink)
     list_to_sheet = [[i] for i in stock_list]
-    print(f"Sending values to worksheet dated {worksheet}\n")
+    print(
+        f"Sending {col_name} values to worksheet for {LATEST_SHEET_TITLE}"
+        f"...\n"
+    )
+
     # This update method specifies the cell to start updating the col
     # from and the var containing the list of list values
     worksheet.update(cell_col_start, list_to_sheet)
-    print(f"Values for worksheet dated {worksheet} updated!\n")
+    print(
+        f"Values for {col_name} in worksheet for {LATEST_SHEET_TITLE} "
+        f"updated!\n")
 
 
 def calculate_items_to_bake(stock_required, stock_on_hand):
@@ -391,12 +399,12 @@ def main():
 
     # Create vars to hold the return values of the get stock on hand
     # function, depending on which program arguments are provided
-    prog0_on_hand = get_stock_on_hand(DEFROSTS, 'Defrosts')
+    # prog0_on_hand = get_stock_on_hand(DEFROSTS, 'Defrosts')
     prog1_on_hand = get_stock_on_hand(APPLE_TURNOVERS, 'Apple Turnovers')
-    prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'Rolls/Baguettes')
-    prog3_on_hand = get_stock_on_hand(DANISH, 'Danish')
-    prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
-    prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
+    # prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'Rolls/Baguettes')
+    # prog3_on_hand = get_stock_on_hand(DANISH, 'Danish')
+    # prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
+    # prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
 
     # Notify user that all stock has been entered
     print("Stock on hand input complete!\n")
@@ -404,12 +412,12 @@ def main():
     # Call the function to join the sub lists together, passing in the
     # vars created from each sub list input
     stock_on_hand_final = combine_program_lists(
-        prog0_on_hand,
+        # prog0_on_hand,
         prog1_on_hand,
-        prog2_on_hand,
-        prog3_on_hand,
-        prog4_on_hand,
-        prog5_on_hand
+        # prog2_on_hand,
+        # prog3_on_hand,
+        # prog4_on_hand,
+        # prog5_on_hand
     )
 
     # Create dict from full list of item names and the final input list
@@ -421,13 +429,14 @@ def main():
     print(f"Number of lines counted: {len(stock_on_hand_final)}\n")
 
     # Update the worksheet stock on hand column
-    worksheet_update_cols(curr_worksheet, stock_on_hand_final, "C2")
+    worksheet_update_cols(
+        curr_worksheet, stock_on_hand_final, "stock on hand", "C2")
 
     # var to store the actual number of items for the baker to prepare
     stock_to_bake = calculate_items_to_bake(stock_req, stock_on_hand_final)
 
     # Update the worksheet stock to bake column
-    worksheet_update_cols(curr_worksheet, stock_to_bake, "D2")
+    worksheet_update_cols(curr_worksheet, stock_to_bake, "stock to bake", "D2")
 
     # Notify user that all data has been processed and present the final
     # results
