@@ -227,7 +227,8 @@ def get_stock_on_hand(program_items, program_name):
         # Get input at the end of the loop for the user to confirm if
         # their list values are correct
         # See: https://bobbyhadz.com/blog/python-input-yes-no-loop
-        user_input = input("Confirm values are correct? Please enter y or n\n")
+        user_input = input(
+            "Confirm values are correct? Please enter 'Y' or 'N'\n")
 
         if user_input.lower() == 'y':
             print(f"Values submitted for {program_name}\n")
@@ -362,6 +363,8 @@ def run_intro():
     This function introduces the user to the application and notifies
     them of program scope.
     """
+    # Print statement show necessary information to the user for program
+    # operation. Dividing lines aid visual clarity
     print("<=======================================================>\n")
     print("Welcome to Lidl BakeMate!\n")
     print(
@@ -391,9 +394,11 @@ def run_intro():
     print("Coded by Joseph Smith (c) 2023\n")
     print("<=======================================================>\n")
 
+    # Loop awaits user input to confirm they are ready to use the
+    # program
     while True:
         user_input = input(
-            "Please enter 'y' when you are ready to start using BakeMate!\n")
+            "Please enter 'Y' when you are ready to start using BakeMate!\n")
         if user_input.lower() == 'y':
             break
         else:
@@ -408,6 +413,7 @@ def main():
     This function calls the other functions in sequence as appropriate
     for program function.
     """
+    # Run the function to display introductory confirmation text
     run_intro()
     # This var holds the return of the user's date input so the
     # appropriate worksheet can be used for the program
@@ -449,7 +455,6 @@ def main():
     print("Complete list of stock on hand entered:\n")
     pprint(full_input_summary, sort_dicts=False)
     print()
-    print(f"Number of lines counted: {len(stock_on_hand_final)}\n")
 
     # Update the worksheet stock on hand column
     worksheet_update_cols(
