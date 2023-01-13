@@ -227,7 +227,7 @@ def get_stock_on_hand(program_items, program_name):
                     # This var specifies that the user's input must be
                     # of int type, which works with the following except
                     # statement
-                    input_str = int((input("Current stock:")))
+                    input_str = int((input("Current stock:\n")))
                 # The except block runs when the user does not enter an
                 # int
                 except ValueError:
