@@ -322,10 +322,10 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     """
     # The following print statements report the values and lengths of
     # their respective lists
-    print(f"Stock required list values:\n {stock_required}\n")
-    print(f"{len(stock_required)} items")
-    print(f"Stock on hand list values:\n {stock_on_hand}\n")
-    print(f"{len(stock_on_hand)} items")
+    # print(f"Stock required list values:\n {stock_required}\n")
+    # print(f"{len(stock_required)} items")
+    # print(f"Stock on hand list values:\n {stock_on_hand}\n")
+    # print(f"{len(stock_on_hand)} items")
 
     # This var will receive the sum of the two lists, after negative
     # ints have been set to 0
@@ -412,8 +412,13 @@ def main():
         prog5_on_hand
     )
 
-    print(f"Complete list of stock on hand:\n {stock_on_hand_final}\n")
-    print(f"Number of items counted: {len(stock_on_hand_final)}\n")
+    # Create dict from full list of item names and the final input list
+    full_input_summary = dict(zip(ITEM_ALL_NAMES, stock_on_hand_final))
+    # Present the pprinted dict of completed item entries
+    print("Complete list of stock on hand entered:\n")
+    pprint(full_input_summary, sort_dicts=False)
+    print()
+    print(f"Number of lines counted: {len(stock_on_hand_final)}\n")
 
     # Update the worksheet stock on hand column
     worksheet_update_cols(curr_worksheet, stock_on_hand_final, "C2")
