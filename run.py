@@ -336,6 +336,21 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     return stock_to_bake
 
 
+def display_input_summary(final_input):
+    """
+    The full input list is shown to the user before being sent to the
+    worksheet.
+
+    A param is provided for the finished input list to be passed in.
+    """
+    # Create dict from full list of item names and the final input list
+    full_input_summary = dict(zip(ITEM_ALL_NAMES, final_input))
+    # Present the pprinted dict of completed item entries
+    print("Complete list of stock on hand entered:\n")
+    pprint(full_input_summary, sort_dicts=False)
+    print()
+
+
 def present_bake_requirements(list_for_baker):
     """
     This function is designed to present to the user the final list of
@@ -449,12 +464,8 @@ def main():
         prog5_on_hand
     )
 
-    # Create dict from full list of item names and the final input list
-    full_input_summary = dict(zip(ITEM_ALL_NAMES, stock_on_hand_final))
-    # Present the pprinted dict of completed item entries
-    print("Complete list of stock on hand entered:\n")
-    pprint(full_input_summary, sort_dicts=False)
-    print()
+    # Show the dict summarizing the complete input to the user
+    display_input_summary(stock_on_hand_final)
 
     # Update the worksheet stock on hand column
     worksheet_update_cols(
