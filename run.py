@@ -223,11 +223,11 @@ def get_stock_on_hand(program_items, program_name):
                 # the user's input if it is not an int value
                 try:
                     print(f"Item group: {program_name}\n")
-                    print(f"Please input stock on hand for {item}:\n")
                     # This var specifies that the user's input must be
                     # of int type, which works with the following except
                     # statement
-                    input_str = int((input("Current stock:\n")))
+                    input_str = int(
+                        (input(f"Please enter stock for {item}:\n")))
                 # The except block runs when the user does not enter an
                 # int
                 except ValueError:
