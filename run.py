@@ -5,6 +5,8 @@
 
 # pprint used to better render list/dict data in terminal
 from pprint import pprint
+# sleep simulates a delay if the user initiates program restart
+from time import sleep
 # gspread, google-auth and numpy installed via pip3 install command
 # gspread library used for google sheets integration
 import gspread
@@ -285,7 +287,7 @@ def get_stock_on_hand(program_items, program_name):
             # Exit loop when user confirms their values are correct
             break
         elif user_input.lower() == 'n':
-            print(f"Re-enter values for {program_name}\n")
+            print(f"Please re-enter values for {program_name}\n")
             # Clear the list on restart to keep correct number of values
             input_list.clear()
             continue
@@ -293,8 +295,8 @@ def get_stock_on_hand(program_items, program_name):
             # Catch-all statement similar to if the user selects 'n' so
             # that the user only submits data they are sure is correct
             print(
-                f"Input not recognized - please re-enter values for "
-                f"{program_name}\n")
+                f"Input not recognized - please re-enter values for the "
+                f"{program_name} program\n")
             input_list.clear()
             continue
 
@@ -401,6 +403,43 @@ def display_input_summary(final_input):
     print()
 
 
+def confirm_full_input():
+    """
+    This function provides the user with their last chance to review
+    their inputs before sending them to the worksheet, or restart the
+    program.
+    """
+    # Start main loop user to confirm full input
+    while True:
+        user_input = input("Submit final entries to database? 'Y' or 'N'\n")
+        if user_input.lower() == "y":
+            print("Thank you. Your entries have been confirmed!\n")
+            break
+        elif user_input.lower() == 'n':
+            # Nested loop to give option to restart program or return to
+            # previous confirmation
+            while True:
+                # Different inputs are required to avoid accidental
+                # option selection
+                user_restart = input(
+                    "** ENTER 'R' TO RETURN OR 'X' TO RESTART PROGRAM **\n")
+                if user_restart.lower() == 'r':
+                    # Return to previous input loop
+                    break
+                elif user_restart.lower() == 'x':
+                    print("Program restarting, please wait...")
+                    # Give the user time to see and process that the
+                    # program is about to restart
+                    sleep(2)
+                    # Run the main function from scratch to restart
+                    main()
+                else:
+                    print("Please return with current entries or restart\n")
+        else:
+            print(
+                "Please confirm your entries for submission to the database\n")
+
+
 def present_bake_requirements(list_for_baker):
     """
     This function is designed to present to the user the final list of
@@ -466,6 +505,9 @@ def main():
 
     # Show the dict summarizing the complete input to the user
     display_input_summary(stock_on_hand_final)
+
+    # Give user last chance to check inputs before sending to worksheet
+    confirm_full_input()
 
     # Update the worksheet stock on hand column
     worksheet_update_cols(
