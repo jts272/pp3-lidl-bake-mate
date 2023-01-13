@@ -245,8 +245,19 @@ def get_stock_on_hand(program_items, program_name):
                         "\n"
                     )
 
+        # Create dict from program items and the input list to present
+        # to the user
+        input_prog_summary = dict(zip(program_items, input_list))
         # Show the final list of entered values for the given program
-        print(f"Stock values provided for {program_name} were: {input_list}\n")
+        print(f"Stock values provided for {program_name} were:\n")
+        # sort_dicts arg required as pprint will display keys
+        # alphabetically by default
+        # See: https://stackoverflow.com/questions/4301069/
+        # any-way-to-properly-pretty-print-ordereddict
+        # (Multi-line hyperlink)
+        pprint(input_prog_summary, sort_dicts=False)
+        print()
+
         # Get input at the end of the loop for the user to confirm if
         # their list values are correct
         # See: https://bobbyhadz.com/blog/python-input-yes-no-loop
