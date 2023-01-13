@@ -368,8 +368,8 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
             # Append to placeholder list only after conditional logic
             stock_to_bake.append(i)
 
-    print(f"Required stock to bake: {stock_to_bake}\n")
-    print(f"{len(stock_to_bake)} items")
+    # print(f"Required stock to bake: {stock_to_bake}\n")
+    # print(f"{len(stock_to_bake)} items")
 
     return stock_to_bake
 
@@ -400,7 +400,7 @@ def present_bake_requirements(list_for_baker):
     final_bake_dict = {k: v for (k, v) in to_bake_dict.items() if v != 0}
     print("Full list of items required for baking:\n")
     # Pretty-print the dict for legibility in the terminal
-    pprint(final_bake_dict)
+    pprint(final_bake_dict, sort_dicts=False)
     print()
     print("Thank you for using Lidl BakeMate! End of program.\n")
 
