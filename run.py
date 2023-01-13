@@ -33,8 +33,8 @@ SHEET = GSPREAD_CLIENT.open("lidl_bake_wk_52-2022")
 
 # const to reference the sheet containing all bakery item properties
 ITEM_REFERENCE_SHEET = SHEET.worksheet("item-reference")
-# const to get the list of items names. gspread returns a list of list
-# items so numpy is used to flatten the list for future use
+# const to get the list of all item names. gspread returns a list of
+# list items so numpy is used to flatten the list for future use
 ITEM_ALL_NAMES = list(np.concatenate(ITEM_REFERENCE_SHEET.get(("A2:A37"))))
 
 # const to reference the most recent worksheet by index
@@ -64,7 +64,7 @@ def get_worksheet_from_input():
             )
             # var to reference the worksheet named by user's input
             worksheet = SHEET.worksheet(user_date)
-            # var to access the actual title of the
+            # var to access the actual title of the inputted worksheet
             worksheet_title = worksheet.title
             # If the input is valid, but not the latest sheet to be
             # completed, inform the user and repeat the input operation
@@ -109,11 +109,11 @@ def get_stock_required(worksheet):
     """
     # Get the values of the stock on hand column from the worksheet
     on_hand_col = worksheet.col_values(2)
-    # Use a list slice to remove the heading, leaving numbers
+    # Use a list slice to remove the heading, leaving only numbers
     # https://www.geeksforgeeks.org/python-list-slicing/
     on_hand_nums = on_hand_col[1::]
-    # Use list comprehension to convert the list to ints
-    # https://www.geeksforgeeks.org/
+    # Use list comprehension to convert the list from strings to ints
+    # See: https://www.geeksforgeeks.org/
     # python-converting-all-strings-in-list-to-integers/
     # (Multi-line hyperlink)
     on_hand_ints = [int(n) for n in on_hand_nums]
@@ -132,37 +132,28 @@ def separate_items_by_program():
     global PASTRIES
     # Get the item names from reference sheet
     items = ITEM_REFERENCE_SHEET.col_values(1)
-    # print(items)
     # Get the corresponding bakery program number
     programs = ITEM_REFERENCE_SHEET.col_values(3)
-    # print(programs)
     # Create a dictionary with zip method to create key: value pairs
     items_by_prog = dict(zip(items, programs))
-    # pprint(items_by_prog)
     # List comprehensions of keys with program number conditional
-    # https://stackoverflow.com/questions/44664247/
+    # See: https://stackoverflow.com/questions/44664247/
     # python-dictionary-how-to-get-all-keys-with-specific-values
     # (Multi-line hyperlink)
     DEFROSTS = [k for k, v in items_by_prog.items() if v == '0']
-    # pprint(f"Defrost program items are: {DEFROSTS}")
     APPLE_TURNOVERS = [k for k, v in items_by_prog.items() if v == '1']
-    # pprint(f"Apple turnover program items are: {APPLE_TURNOVERS}")
     ROLLS_BAGUETTES = [k for k, v in items_by_prog.items() if v == '2']
-    # pprint(f"Rolls/baguettes program items are: {ROLLS_BAGUETTES}")
     DANISH = [k for k, v in items_by_prog.items() if v == '3']
-    # pprint(f"Danish program items are: {DANISH}")
     CHEESE_ROLLS = [k for k, v in items_by_prog.items() if v == '4']
-    # pprint(f"Cheese rolls program items are: {CHEESE_ROLLS}")
     PASTRIES = [k for k, v in items_by_prog.items() if v == '5']
-    # pprint(f"Pastry program items are: {PASTRIES}")
 
 
 def get_stock_on_hand(program_items, program_name):
     """
-    This is the function that take user input for the stock on hand.
+    This is the function that takes user input for the stock on hand.
     Taking the program var as a parameter, it will loop through each
-    item in the given program and request the current quantity for the
-    user to enter.
+    item in the given program and request the current quantity on hand
+    for the user to enter.
 
     The program name is provided as a string argument when called to
     present the final values entered for the program clearly to the
@@ -207,7 +198,7 @@ def get_stock_on_hand(program_items, program_name):
                 if input_str >= 0:
                     # The user's input is confirmed
                     print(f"You entered {input_str} units for {item}\n")
-                    # The input is an int and is in range so is appened
+                    # The input is an int and is in range so is appended
                     # to the list returned by the function
                     input_list.append(input_str)
                     # The while loop can now be broken and the for loop
@@ -233,7 +224,6 @@ def get_stock_on_hand(program_items, program_name):
         # (Multi-line hyperlink)
         pprint(input_prog_summary, sort_dicts=False)
         print()
-
         # Get input at the end of the loop for the user to confirm if
         # their list values are correct
         # See: https://bobbyhadz.com/blog/python-input-yes-no-loop
@@ -277,7 +267,6 @@ def combine_program_lists(*programs):
         # See: https://www.w3schools.com/python/python_lists_join.asp
         final_list.extend(program)
 
-    # print(final_list)
     return final_list
 
 
@@ -287,8 +276,8 @@ def worksheet_update_cols(worksheet, stock_list, col_name, cell_col_start):
 
     Arguments passed in are the worksheet to be updated and with which
     list. As the function is to be used for updating different cols, a
-    param is included to pass in the name of the col being updated as a 
-    string The worksheet cell to start updating the column from is also
+    param is included to pass in the name of the col being updated as a
+    string. The worksheet cell to start updating the column from is also
     passed in as a string.
 
     The var for the worksheet is captured in the first function in which
@@ -308,7 +297,6 @@ def worksheet_update_cols(worksheet, stock_list, col_name, cell_col_start):
         f"Sending {col_name} values to worksheet for {LATEST_SHEET_TITLE}"
         f"...\n"
     )
-
     # This update method specifies the cell to start updating the col
     # from and the var containing the list of list values
     worksheet.update(cell_col_start, list_to_sheet)
@@ -328,13 +316,6 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     be amended to 0 as the function is returning a quantity of items for
     the baker to prepare.
     """
-    # The following print statements report the values and lengths of
-    # their respective lists
-    # print(f"Stock required list values:\n {stock_required}\n")
-    # print(f"{len(stock_required)} items")
-    # print(f"Stock on hand list values:\n {stock_on_hand}\n")
-    # print(f"{len(stock_on_hand)} items")
-
     # This var will receive the sum of the two lists, after negative
     # ints have been set to 0
     stock_to_bake = []
@@ -342,7 +323,6 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
     for required, on_hand in zip(stock_required, stock_on_hand):
         # List var to hold each value after arithmetic operation
         calculation = [(required - on_hand)]
-        # print(calculation)
         # Address each item in the calculation list and adjust any ints
         # that are less than 0 to 0
         # See: https://martinheinz.dev/blog/80
@@ -351,9 +331,6 @@ def calculate_items_to_bake(stock_required, stock_on_hand):
                 i = 0
             # Append to placeholder list only after conditional logic
             stock_to_bake.append(i)
-
-    # print(f"Required stock to bake: {stock_to_bake}\n")
-    # print(f"{len(stock_to_bake)} items")
 
     return stock_to_bake
 
@@ -366,7 +343,6 @@ def present_bake_requirements(list_for_baker):
     """
     # Create the zipped dict from item names and list arg
     to_bake_dict = dict(zip(ITEM_ALL_NAMES, list_for_baker))
-
     # This dict comprehension adds key: value pairs to the final list
     # on the condition that they are not asking for 0 items to be baked
     # See example 4 in the link below:
@@ -399,12 +375,12 @@ def main():
 
     # Create vars to hold the return values of the get stock on hand
     # function, depending on which program arguments are provided
-    # prog0_on_hand = get_stock_on_hand(DEFROSTS, 'Defrosts')
+    prog0_on_hand = get_stock_on_hand(DEFROSTS, 'Defrosts')
     prog1_on_hand = get_stock_on_hand(APPLE_TURNOVERS, 'Apple Turnovers')
-    # prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'Rolls/Baguettes')
-    # prog3_on_hand = get_stock_on_hand(DANISH, 'Danish')
-    # prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
-    # prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
+    prog2_on_hand = get_stock_on_hand(ROLLS_BAGUETTES, 'Rolls/Baguettes')
+    prog3_on_hand = get_stock_on_hand(DANISH, 'Danish')
+    prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
+    prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
 
     # Notify user that all stock has been entered
     print("Stock on hand input complete!\n")
@@ -412,12 +388,12 @@ def main():
     # Call the function to join the sub lists together, passing in the
     # vars created from each sub list input
     stock_on_hand_final = combine_program_lists(
-        # prog0_on_hand,
+        prog0_on_hand,
         prog1_on_hand,
-        # prog2_on_hand,
-        # prog3_on_hand,
-        # prog4_on_hand,
-        # prog5_on_hand
+        prog2_on_hand,
+        prog3_on_hand,
+        prog4_on_hand,
+        prog5_on_hand
     )
 
     # Create dict from full list of item names and the final input list
