@@ -3,14 +3,12 @@
 # Source guide for dependencies and var setup:
 # https://www.youtube.com/watch?v=lPTKUiafTRY
 
-# pprint used to better render list data in terminal
+# pprint used to better render list/dict data in terminal
 from pprint import pprint
-# DictReader is used to construct data structures from csv files
-# from csv import DictReader
 # gspread, google-auth and numpy installed via pip3 install command
 # gspread library used for google sheets integration
 import gspread
-# Only Credentials class imported from google-auth for authorization
+# Only the Credentials class imported from google-auth for authorization
 from google.oauth2.service_account import Credentials
 # numpy is used for its list concatenating method
 import numpy as np
@@ -26,36 +24,18 @@ SCOPE = [
 
 # const to hold the untracked credentials file
 CREDS = Credentials.from_service_account_file("creds.json")
-# const to give scopes to the credentials
+# const to give scope to the credentials
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 # const to authorize the gspread client with these scoped credentials
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # const to hold the full spreadsheet
 SHEET = GSPREAD_CLIENT.open("lidl_bake_wk_52-2022")
 
-# vars to reference the individual worksheets of the full spreadsheet
-# wk52_tue_sheet = SHEET.worksheet("27-12-22")
-# wk52_wed_sheet = SHEET.worksheet("28-12-22")
-wk52_thu_sheet = SHEET.worksheet("29-12-22")
-item_reference_sheet = SHEET.worksheet("item-reference")
-
-# vars containing the data of the specified sheet in list format
-# wk52_tue_data = wk52_tue_sheet.get_all_values()
-# wk52_wed_data = wk52_wed_sheet.get_all_values()
-# wk52_thu_data = wk52_thu_sheet.get_all_values()
-item_reference_data = item_reference_sheet.get_all_values()
-item_reference_dict = item_reference_sheet.get_all_records()
-
-# print(item_reference_dict.pop(2))
-
-# ITEM_NAMES_LIST = item_reference_sheet.get("A2:A37")
-# print(ITEM_NAMES_LIST)
-# print to test API function
-# print(wk52_tue_data)
-# print(wk52_wed_data)
-# print(wk52_thu_data)
-# pprint(item_reference_data)
-# pprint(item_reference_dict)
+# const to reference the sheet containing all bakery item properties
+ITEM_REFERENCE_SHEET = SHEET.worksheet("item-reference")
+# const to get the list of items names. gspread returns a list of list
+# items so numpy is used to flatten the list for future use
+ITEM_ALL_NAMES = list(np.concatenate(ITEM_REFERENCE_SHEET.get(("A2:A37"))))
 
 
 def get_worksheet_from_input():
@@ -155,10 +135,10 @@ def separate_items_by_program():
     global DEFROSTS, APPLE_TURNOVERS, ROLLS_BAGUETTES, DANISH, CHEESE_ROLLS
     global PASTRIES
     # Get the item names from reference sheet
-    items = item_reference_sheet.col_values(1)
+    items = ITEM_REFERENCE_SHEET.col_values(1)
     # print(items)
     # Get the corresponding bakery program number
-    programs = item_reference_sheet.col_values(3)
+    programs = ITEM_REFERENCE_SHEET.col_values(3)
     # print(programs)
     # Create a dictionary with zip method to create key: value pairs
     items_by_prog = dict(zip(items, programs))
@@ -380,16 +360,8 @@ def present_bake_requirements(list_for_baker):
     items to prepare in the bakery in the terminal, using the final
     calculated stock list.
     """
-    # Get the names of all bakery items from the item reference sheet by
-    # A1 notation. Note that gspread returns this as a list of lists
-    item_name_list = item_reference_sheet.get("A2:A37")
-
-    # By using numpy's concatenate method in creating a single list of
-    # ints, this is acheived in one line of code
-    flat_item_name_list = list(np.concatenate(item_name_list))
-
     # Create the zipped dict from item names and list arg
-    to_bake_dict = dict(zip(flat_item_name_list, list_for_baker))
+    to_bake_dict = dict(zip(ITEM_ALL_NAMES, list_for_baker))
 
     # This dict comprehension adds key: value pairs to the final list
     # on the condition that they are not asking for 0 items to be baked
@@ -410,19 +382,16 @@ def main():
     This function calls the other functions in sequence as appropriate
     for program function.
     """
+    # This var holds the return of the user's date input so the
+    # appropriate worksheet can be used for the program
     curr_worksheet = get_worksheet_from_input()
-    # print(curr_worksheet)
 
+    # var to get the required stock from the user selected worksheet
     stock_req = get_stock_required(curr_worksheet)
-    # print(stock_req)
 
+    # Calls the function to break down the full list of bakery items
+    # by program type
     separate_items_by_program()
-    # print(DEFROSTS)
-    # print(APPLE_TURNOVERS)
-    # print(ROLLS_BAGUETTES)
-    # print(DANISH)
-    # print(CHEESE_ROLLS)
-    # print(PASTRIES)
 
     # Create vars to hold the return values of the get stock on hand
     # function, depending on which program arguments are provided
@@ -433,14 +402,7 @@ def main():
     prog4_on_hand = get_stock_on_hand(CHEESE_ROLLS, 'Cheese Rolls')
     prog5_on_hand = get_stock_on_hand(PASTRIES, 'Pastries')
 
-    # print("Input for all items by program:\n")
-    # print(f"Defrosts: {prog0_on_hand} ({len(prog0_on_hand)} items)")
-    # print(f"Apple Turnovers: {prog1_on_hand} ({len(prog1_on_hand)} items)")
-    # print(f"Rolls/Baguettes: {prog2_on_hand} ({len(prog2_on_hand)} items)")
-    # print(f"Danish: {prog3_on_hand} ({len(prog3_on_hand)} items)")
-    # print(f"Cheese Rolls: {prog4_on_hand} ({len(prog4_on_hand)} items)")
-    # print(f"Pastries: {prog5_on_hand} ({len(prog5_on_hand)} items)\n")
-
+    # Notify user that all stock has been entered
     print("Stock on hand input complete!\n")
 
     # Call the function to join the sub lists together, passing in the
@@ -466,8 +428,9 @@ def main():
     # Update the worksheet stock to bake column
     worksheet_update_cols(curr_worksheet, stock_to_bake, "D2")
 
+    # Notify user that all data has been processed and present the final
+    # results
     print("Data entry complete!\n")
-
     present_bake_requirements(stock_to_bake)
 
 
