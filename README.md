@@ -386,7 +386,8 @@ All instances of inputting a single letter in menus has been programmed and
 Common to all functions was the testing of args working as intended, and vars
  being correctly displayed to the user in print/input elements.
 
-Functions that perfom actions that the user never sees are marked with '(H)'.
+Functions that perfom actions that the user never interacts with directly are
+ marked with '(H)'.
 
 #### API Functionality
 
@@ -471,7 +472,7 @@ Functions that perfom actions that the user never sees are marked with '(H)'.
 
 #### Calculate Items to Bake Function (H)
 
-- args passed in work with mathematical operators (`-`) :heavy_check_mark:
+- args passed in work with mathematical operators such as `-` :heavy_check_mark:
 - Conditional logic adjusts negative ints to '0' :heavy_check_mark:
 - List is returned from function with desired values :heavy_check_mark:
 
@@ -486,7 +487,7 @@ Functions that perfom actions that the user never sees are marked with '(H)'.
 
 ## Validation and Version Control
 
-I setup my working environment to make validation easier. Fist, as Python uses
+I setup my working environment to make validation easier. First, as Python uses
  indentation in codeblocks, I used a VS Code extension to highlight indentation
  levels and marks errors in red.
 
@@ -578,50 +579,80 @@ I have continued to implement the
 
 ## Project Outcome Summary
 
-- Justify Criteria
+This project was built with clarity of purpose in logical steps. By considering
+ the user stories, each function was designed with the user and their desired
+ outcome in mind.
 
-- How project needs were met
-- Input handling
-- Data-driven programming constructs
-- Exception handling
-- Real-world data model for business needs
+Inputs are handled appropriately. Errors are recognized by the program, which
+ guides the user towards their next input action. The program has not been found
+ to crash as a result of user input. Exception handling is implemented to cover
+ all of the opportunities for user input error. In all instances, the error and
+ solution is communicated to the user.
 
-- Efficient code
-- Flow, granular functions
-- No validation errors
-- Why libraries were used
+This project was data-driven and as such, 
+ [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) concepts such
+ as classes were not present in my solution. The program, along with the
+ spreadsheet work in tandem to meet the needs of real-world business. The data
+ model uses real figures which produce an accurate result for the business'
+ needs.
 
-![Evidence of meeting project goals]
+Every effort has been made to implement efficient, well-documented code that
+ leverages the power of Python. I found features such as list comprehensions 
+ interesting to work with. Python's extensible nature through library imports
+ was of great use in this project. I found by searching the web that there
+ are many libraries and modules to 'drop-in' to Python projects to implement
+ a feature - sometimes with just
+ [one line of code!](https://github.com/jts272/pp3-lidl-bake-mate/commit/60305a296751876c95e20f64559c6aa4ed6080d1)
+
+The program runs with a logical flow, in both code and UX. I utilized a `main()`
+ function that would call the other functions in sequence. This was great for
+ 'switching functions on and off' during development and testing. As development
+ progressed, I became increasingly confident with core programming concepts,
+ such as arguments, loops and how data types interact.
+
 
 ### Design
-- Positive emotional response
-- Only input what is required
-- All errors reported
-- Consistent flow of functions
-- Confirmation and feedback
+
+Design of the project was considerate of its future users. At its core, it is
+ a tool for working with numbers, but it is still important to elicit a positive
+ emotional response from users - especially in the fast-paced work environment
+ it was designed for. Commands are politely assertive, whilst always keeping the
+ user in control of their data.
+
+The program is designed in such a way that the user only performs the actions
+ essential to program function. Any errors are reported and feedback is given
+ every step of the way.
 
 ### Development & Implementation
-- Clean code
-- Defensive design
-- Comments
-- PEP8 compliance
-- Robust code:
-  - No logic errors, error handling, API handling, input validation
+
+Efforts have been made to follow 
+ [clean coding](https://www.freecodecamp.org/news/clean-coding-for-beginners/)
+ principles.
+ [Refactoring a function](https://github.com/jts272/pp3-lidl-bake-mate/commit/cedb6376aed2b2862198dc5e81640944e7c1b81a)
+  to help follow the
+  [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) is one
+  such example. Consistent coding style is evident, as well as no validation
+  errors presenting in the final program.
+
+By following concepts of defensive design, I ensured that the final code is
+ robust, presenting no logic errors. This manifests in the validation of user
+ inputs that facilitate smooth API integration. No terminal errors have been
+ found in the deployed program.
 
 ### Real-World Application
 
+In considering the real-world usage scenario at project inception, I created
+ program logic that could easily be transposed to the ACD hardware. I am very
+ familiar with the process the program covers. I enjoyed the challenge of taking
+ an everyday work activity and dataset and finding a way to optimize that
+ process.
+
 ### Security
 
-- CREDS.json
-
-### Data
-
-- Well-structured
-- Dependencies frozen
-- No terminal errors
-- Version control
-- Credit inline
-- Self-explanatory readme
+Security must be considered due to the API functionality requiring credentials.
+After generating credentials on the spreadsheet side, this sensitive data was
+added to the `.gitignore` file. This means that this core project file is used
+but never exposed as project files are pushed to GitHub.
 
 ---
 
