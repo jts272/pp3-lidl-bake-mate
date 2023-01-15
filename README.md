@@ -208,29 +208,116 @@ Below is the main function flow chart as seen in the deployed program:
 
 ## Features
 
+Here we will examine the what, why and how of each individual function.
+Functions are presented here in order of operation, from program start.
+
 ### Display Program Introduction
+
+On program start, the user is presented with a text box that serves to get the
+ first-time user accquainted with the program. It informs the user what the
+ program does. Links are given so that the user may access the accompanying
+ worksheet and this readme document.
+
+A confirmation prompt is provided, which is a returning theme throughout the
+ subsequent features. From here, the program moves to the foundational function
+ from which the rest of the program's data is based upon.
+
+![func Intro]
 
 ### Date Input
 
+Much like other date-sensitive tasks, the user is first required to input the
+ date:
+
 ![ACD date input]
+
+![func Date input]
+
+Exceptions are handled in the event that the user submits a date that is not
+ valid, or a past date that the program and database already have data for. Note
+ that this does not invlove Python date objects. The user is prompted to enter a
+ string *in a specified date format* which correlates to how the Google Sheet is
+ set up. Of further note is that user input on the ACD is numerical.
+
+If users enter a text string, then they are notified that no data is available.
+ If a past date is provided, they are notified of the most recent date
+ available. Remember that this scenario spans a three-day period of time. In
+ real-world deployment, the lastest sheet would always give the current days's
+ date as the spreadsheet would always be updated with the lastest worksheet from
+ the Head Office side.
+
+![func Past date]
 
 ![ACD date out of range]
 
+On successful date input, the program proceeds to the stock entry function.
+
 ### Stock Input
 
-- Confirmation
+The user inputs the stock on hand for a given line, in a given product group.
+ Bakery products in-store are also merchandised in a manner that resembles their
+ respective baking program.
+
+![func Item entry]
+
+The choice was made to break the input down into sections. In this way, the user
+ can confirm their entries in subsections, rather than having to submit values
+ for the full list of 30+ lines before reviewing. This reflects the concept of
+ [chunking](https://en.wikipedia.org/wiki/Chunking_(psychology)) in psychology.
+
+At the end of each subsection, the user is presented with their inputs per line.
+ They are given the choice to confirm that their entries are correct, by which
+ they can continue to the next program's stock entries.
+
+![func Confirm program input]
+
+If the user selects 'N', the current subsection's input request will repeat:
+
+![func Deny program input]
+
+In the event that the 'Y' or 'N' input is not recognized, the program will ask
+ for user input for the program again, to rule out errors defensively.
+
+![func Bad input repeat]
 
 ### Final Stock Confirmation
 
-- Restart Program
+All of the user's inputs by program are presented in a final list of 'Item' :
+ 'Quantity'. This allows the user one last chance to check their entries before
+ submission to the database. The user is informed that this will be the next
+ action:
+
+![func Final confirm]
+
+When the user confirms their values, the data submission and display final
+ figures display functions will run. However, if the user selects 'N', they are
+ given a clear choice to either return with their current values or restart the
+ program. In this event, all user input is recollected.
+
+![func Restart program]
 
 ### Update Worksheets
 
-- Stock on hand
+When the user confirms their complete entries, these figures are sent to the
+ worksheet by the API. It is shown to the user which values are being sent and
+ which worksheet is being updated.
 
-- Stock to bake
+![func Update stock on hand sheet]
+
+![func Update stock to bake sheet]
 
 ### Display Final Stock to Bake
+
+Finally, the user is presented with the list of stock they are required to bake.
+ Crucially, any lines that require 0 items to be baked are excluded from this
+ list using conditional logic. This presents a clean, essential list for the
+ user to continue with their next task with exactly the information they need.
+
+![func Display final results]
+
+The user is thanked for their input and notified that the program has finished.
+
+![func End of program]
 
 ---
 
