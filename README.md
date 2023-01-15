@@ -101,9 +101,62 @@ The spreadsheet holds the data for past day's entries, as shown for dates 27 and
 
 ## Planning
 
+Inception of the program involved jotting down on paper the steps of the main
+ function.
+
+1. Take input from the user for bake lines on-hand
+2. Subtract these values from the stock required list
+3. Output these results:
+   - To API sheet
+   - In terminal format
+
+It also became clear that the date must be captured, so the program can address
+ the correct figures for the particualar day of business. This is common in
+ date-sensitive ACD applications:
+
+![ACD date entry]
+
+When all the parts were in place, I jotted down a paper flow chart consisting of
+ the functions I would need to code. As each function was operational, I checked
+ it off the list and moved to the next one.
+
+As testing developed, it became clear that several additional functions would
+ need to be implemented to fully realize the project goals. These will be
+ explored in the features section in detail.
+
 ### UX
 
+First and foremost, this program is designed for daily use in a fast-paced,
+ customer-centric industry. The application must perform its required function
+ efficiently and without friction for the user.
+
+Program flow is clear. The user is guided through the process in polite yet
+ assertive manner. All actions are confirmed and no action is taken without
+ the user being sure of their choice. All instances of program function are
+ clearly delineated and the user should never be confused about what is
+ happening at any given moment.
+
 ### User Stories
+
+Two parties are referenced in the following user stories:
+
+- The 'Client' - Lidl GB
+- The 'User' - The Lidl bakery co-ordinator member of staff
+
+Client goals:
+
+- Increase operational efficiency in daily afternoon bake task
+- Aid KPI's by generating correct figures - e.g. only baking what is required
+- To make the task accessible to all staff, regardless of mathematical ability
+- To further aid the push to paperless working
+
+User goals:
+
+- To perform the daily afternoon bake task more efficiently
+- To have confidence that their bake plan is correct
+- To have a frictionless experience in performing their task
+
+In the testing section, we will examine how these outcomes have been achieved.
 
 ---
 
