@@ -10,7 +10,92 @@ Accompanying spreadsheet - [Google Sheets](https://docs.google.com/spreadsheets/
 
 ## Overview
 
-- Usage Scenario
+Lidl BakeMate is a data-driven Python progam with Google Sheets integration that
+ aims to boost productivity in Lidl GB stores. The program requests input from
+ the user which is used to perform calculations which increase efficiency in a
+ daily task. Data is presented in an accessible format to the user in the
+ terminal, as well as in the integrated worksheet. 
+
+### Usage Scenario
+
+Lidl prides itself on its in-store bakery offering. Goods are baked three times
+ per day (twice on a Sunday), according to the bake plan for the day - which is
+ unique to the store. Both morning bakes are produced as laid out on the plan.
+ However, the third and final bake of the day works differently. Bakery
+ co-ordinators jot down their current stock levels for each line at 14:00. From
+ there, they will subtract their stock on hand from the final stock required
+ column on their paper worksheet. After they have manually written down this
+ sum, they will then proceed to bake the goods needed in the calculated
+ quantities.
+
+As efficiency is a cornerstone to Lidl's success, this program aims to increase
+ productivity in this task. By guiding the user through the process and
+ performing all arithmetic for them, this program produces the desired result
+ with the minimum of effort and error.
+
+Furthermore, this program would bolster Lidl's overall push for paperless
+ working. The logic for this program is designed to work on the handheld
+ terminal (ACD) which each store uses for data-driven processes.
+
+### ACD
+
+![ACD]
+
+This handheld device is fundamental to store operation through a range of data-
+driven processes. Input consists of:
+
+- Numerical keypad
+- Enter key (red)
+- Clear key ('C')
+- Up/down keys (to scroll through lists)
+- Function keys (top row)
+- Context prompts on touch screen (Yes, No, Back, etc.)
+
+The hardware is taken into account in the program. Program input is simple,
+ requiring input only from numbers or single letters. For example, instances
+ in the program where the user inputs 'Y' then the Enter key on the keyboard
+ simulate simply pressing the Enter key on the ACD.
+
+### Google Sheets Integration
+
+[Please refer to the program's accompanying spreadsheed](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
+
+Bake plans are sent to each store by the internal Back Office system. The Google
+ Sheet functions to replicate this database. In the deployed program, the sheet
+ uses real-world figures from an actual Lidl store operating in the Newton-
+Aycliffe region. Figures are from a three-day span in week 52, 2022. In 
+real-world deployment, there would be ongoing communication between the database
+ and program. However, this scenario has simulated as three day period of time
+ as a proof-of-concept.
+
+The sheet serves as a reference point for the program to use, much like how
+ current in-store staff refer to their paper bakery plans. The sheet contains
+ an item reference sheet and the bakery plan for the given day as its own
+ worksheet.
+
+![Item reference]
+
+![28-12-22 plan]
+
+It is important to note that the naming conventions in the worksheets are
+ followed, as the API relies on worksheet data to function. This is reflected in
+ elements such as worksheet title, cell formatting and insertion of the newest
+ sheet last in the overall spreadsheet.
+
+The item reference sheet contains data on each individual bakery line for the
+ program to address. Data such as the item name and bakery program is integral
+ to the program flow.
+
+Each day's bake plan has its own worksheet for the program to reference. This
+ allows it to provide the correct plan to perform calculations against the
+ user's input.
+
+The spreadsheet holds the data for past day's entries, as shown for dates 27 and
+ 28-12-22. In the program scenario, the user is inputting data to calculate
+ the lines they need to bake on 29-12-22. After the user confirms their inputs
+ are correct, the API updates this worksheet. On the next day of trade, the
+ user would be working with data for 30-12-22 in a real-world deployment and the
+ 29-12-22 figures would be complete and serve as a past record.
 
 ---
 
