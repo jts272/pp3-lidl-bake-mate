@@ -209,7 +209,9 @@ Below is the main function flow chart as seen in the deployed program:
 ## Features
 
 Here we will examine the what, why and how of each individual function.
-Functions are presented here in order of operation, from program start.
+Functions are presented here in order of operation, from program start. The
+ functions detailed here are the ones that form the UX. More 'behind the scenes'
+ functions are addressed in the testing section.
 
 ### Display Program Introduction
 
@@ -339,11 +341,146 @@ The user is thanked for their input and notified that the program has finished.
 
 ## Testing
 
-- Show procedures
+This section details what was tested for and the result achieved. Procedures are
+shown for the program functions that were tested. After saving my code, by
+ entering `python3 run.py` into the terminal, I was able to run my code within
+ my IDE. This allowed me to collect instant feedback from these procedures and
+ make adjustments as required.
 
-- Each function
+### User Stories Testing
 
-- Text formatting
+Each goal is addressed with an explanation of how the goal was facilitated.
+
+Client goals:
+
+- Increase operational efficiency in daily afternoon bake task
+  - The program allows staff to complete a daily task in a logical manner, which
+     produces the desired numerical result
+- Aid KPI's by generating correct figures - e.g. only baking what is required
+  - Human error is reduced as the program handles all arithmetic
+- To make the task accessible to all staff, regardless of mathematical ability
+  - The program flow is made clear so can be used with little need for training
+     or mathematical ability
+- To further aid the push to paperless working
+  - The program moves a pen and paper task to the ACD and keeps electronic
+     records in the spreadsheet
+
+User goals:
+
+- To perform the daily afternoon bake task more efficiently
+  - The user is guided through the progam, needing only to enter numbers to the
+    terminal
+- To have confidence that their bake plan is correct
+  - All arithmetic is handled by the program and all input must be confirmed
+- To have a frictionless experience in performing their task
+  - The program is simple, self explanatory and has user-friendly flow
+
+### Function Testing
+
+All instances of inputting a single letter in menus has been programmed and
+ tested to work, regardless of being upper or lower case. Text formatting was
+ tested and adjusted before committing each function to GitHub. Factors tested
+ included newline insertion, pretty-print behaviour and display behaviour inside
+ the Heroku mock-terminal.
+
+Common to all functions was the testing of args working as intended, and vars
+ being correctly displayed to the user in print/input elements.
+
+Functions that perfom actions that the user never sees are marked with '(H)'.
+
+#### API Functionality
+
+- Credential setup allows access to spreadsheet :heavy_check_mark:
+- gspread methods access desired sheet data :heavy_check_mark:
+
+#### Introductory Text Function
+
+- All necessary text is displayed within terminal bounds :heavy_check_mark:
+- 'Y' key moves app forward, regardless of case :heavy_check_mark:
+- Any other input requests the user to enter 'Y' to proceed :heavy_check_mark:
+
+#### Date Input Function
+
+- Entering most recent date in specified format moves the app forward
+   :heavy_check_mark:
+- Entering a date on file that is not the current date asks for input again and
+  informs the user of the date needed to input :heavy_check_mark:
+- Any other input notifies the user of the most recent date and to input it
+   :heavy_check_mark:
+- The function returns reference to the desired sheet :heavy_check_mark:
+
+#### Get Stock Required Function (H)
+
+- The correct col is selected for the sheet, based on arg supplied
+   :heavy_check_mark:
+- Desired list is returned in the correct format :heavy_check_mark:
+
+#### Separate Items by Program Function (H)
+
+- vars given global scope are accessible by other functions :heavy_check_mark:
+- dict created inside function has desired values :heavy_check_mark:
+- Each list comprehension created from the function contain the desired items
+   :heavy_check_mark:
+
+#### Enter Stock Values Function
+
+- Current item group (bakery program) is shown :heavy_check_mark:
+- Current item is shown and loops in correct order :heavy_check_mark:
+- Entering a valid number proceeds to the next item :heavy_check_mark:
+- Entering a negative number is not recorded and the user is prompted for the
+   correct format :heavy_check_mark:
+- Any other input is marked as invalid and the user is shown the format
+   required :heavy_check_mark:
+- Program summary dict is shown in insertion order, with inputted values
+   :heavy_check_mark:
+- 'Y' or 'N' inputs perform their function to proceed or restart the count
+   :heavy_check_mark:
+- Any other input on confirmation option repeats the current program count
+  :heavy_check_mark:
+- Input proceeds correctly by program group after confirmation, based off args
+   supplied at function call :heavy_check_mark:
+
+#### Combine Program Lists Function (H)
+
+- *args are combined in insertion order, to form one continuous list
+   :heavy_check_mark:
+- List is returned to other functions :heavy_check_mark:
+
+#### Display Final Summary Function
+
+- Desired results are pprinted to the terminal in the correct format
+   :heavy_check_mark:
+
+#### Confirm Full Input Summary Function
+
+- Final input dict is shown with correct values in insertion order
+   :heavy_check_mark:
+- User can select 'N' to enter program reset prompt :heavy_check_mark:
+- Program reset restarts the program :heavy_check_mark:
+- User can always return to the previous input prompt :heavy_check_mark:
+- Inputting 'Y' proceeds to next function where the results interact with the
+   API :heavy_check_mark:
+
+#### Update Worksheet Function
+
+- The correct cells are updated with the correct data, based on function args
+   :heavy_check_mark:
+- The user is notified on which parts of the sheet are being updated, based on
+   function args :heavy_check_mark:
+
+
+#### Calculate Items to Bake Function (H)
+
+- args passed in work with mathematical operators (`-`) :heavy_check_mark:
+- Conditional logic adjusts negative ints to '0' :heavy_check_mark:
+- List is returned from function with desired values :heavy_check_mark:
+
+#### Present Bake Requirements Function
+
+- Function produces the correct dict using the const for all item names and the
+   supplied arg :heavy_check_mark:
+- dict is displayed in the correct format and order for the baker
+   :heavy_check_mark:
 
 ---
 
