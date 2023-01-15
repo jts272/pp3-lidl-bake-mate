@@ -162,11 +162,49 @@ In the testing section, we will examine how these outcomes have been achieved.
 
 ## Design Process
 
-- Main Function
+### API Integration
+
+Before writing any functions, the first order of business was to setup any
+ dependencies and test the API for Google Sheets integration. This required 
+ the libraries for gspread and google-auth.
+
+Tests were made to confirm API function by printing vars made by gspread
+ methods. [See commit f8f16c0](https://github.com/jts272/pp3-lidl-bake-mate/commit/f8f16c08f60e22d4d4479ed191d596766aec3081)
+
+With API integration confirmed, I would proceed to code the initial versions of
+ each function, with the aim of achieving the MVP detailed above in the planning
+ section.
+
+### Main Function
+
+As my first full terminal program and Python project, my initial goal was to
+ simply write the necessary functions in order to produce the ultimate result
+ of providing the bake plan. As each function developed, I thought of and tested
+ for any errors that may occur from either the API or user input. I would later
+ refactor or even rewrite functions in the name of project goals.
+
+For example, it became clear that creating a var for each worksheet would not be
+ scalable in a real-world scenario. I had to think of different ways for the
+ user and program to access the necessary worksheet.
+
+I had experimented with using `.csv` formats with the `DictReader` library.
+ Upon further reading of the gspread docs, I had found that certain actions I
+ wanted to perform were available as gspread methods.
+
+After the MVP was achieved, I looked at ways to implement exception handling and
+ user confirmation. It was vital that the user could access the data they need,
+ be confident in their inputs and have all interactions provide feedback. This
+ was an iterative process and a great exercise in
+ [defensive design](https://en.wikipedia.org/wiki/Defensive_design) thinking.
+
+Furthermore, at each step, I would consider text formatting and how to best
+ present the terminal data in a clear, pleasing manner.
+
+Below is the main function flow chart as seen in the deployed program:
 
   - ![Main flow chart]
 
-- API Integration
+---
 
 ## Features
 
