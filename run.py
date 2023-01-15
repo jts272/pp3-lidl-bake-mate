@@ -161,9 +161,7 @@ def get_stock_required(worksheet):
     # https://www.geeksforgeeks.org/python-list-slicing/
     on_hand_nums = on_hand_col[1::]
     # Use list comprehension to convert the list from strings to ints
-    # See: https://www.geeksforgeeks.org/
-    # python-converting-all-strings-in-list-to-integers/
-    # (Multi-line hyperlink)
+    # See: shorturl.at/fpHMS
     on_hand_ints = [int(n) for n in on_hand_nums]
     return on_hand_ints
 
@@ -185,9 +183,7 @@ def separate_items_by_program():
     # Create a dictionary with zip method to create key: value pairs
     items_by_prog = dict(zip(items, programs))
     # List comprehensions of keys with program number conditional
-    # See: https://stackoverflow.com/questions/44664247/
-    # python-dictionary-how-to-get-all-keys-with-specific-values
-    # (Multi-line hyperlink)
+    # See: shorturl.at/jCJT6
     DEFROSTS = [k for k, v in items_by_prog.items() if v == '0']
     APPLE_TURNOVERS = [k for k, v in items_by_prog.items() if v == '1']
     ROLLS_BAGUETTES = [k for k, v in items_by_prog.items() if v == '2']
@@ -267,9 +263,7 @@ def get_stock_on_hand(program_items, program_name):
         print(f"Stock values provided for {program_name} were:\n")
         # sort_dicts arg required as pprint will display keys
         # alphabetically by default
-        # See: https://stackoverflow.com/questions/4301069/
-        # any-way-to-properly-pretty-print-ordereddict
-        # (Multi-line hyperlink)
+        # See: shorturl.at/iszT2
         pprint(input_prog_summary, sort_dicts=False)
         print()
         # Get input at the end of the loop for the user to confirm if
@@ -338,9 +332,7 @@ def worksheet_update_cols(worksheet, stock_list, col_name, cell_col_start):
     """
     # List comprehension to convert the list passed into the function
     # into a list of lists
-    # See: https://stackoverflow.com/questions/38604805/
-    # convert-list-into-list-of-lists
-    # (Multi-line hyperlink)
+    # See: shorturl.at/abmV6
     list_to_sheet = [[i] for i in stock_list]
     print(
         f"Sending {col_name} values to worksheet for {LATEST_SHEET_TITLE}"
@@ -446,10 +438,7 @@ def present_bake_requirements(list_for_baker):
     to_bake_dict = dict(zip(ITEM_ALL_NAMES, list_for_baker))
     # This dict comprehension adds key: value pairs to the final list
     # on the condition that they are not asking for 0 items to be baked
-    # See example 4 in the link below:
-    # https://www.programiz.com/python-programming/
-    # dictionary-comprehension
-    # (Multi-line hyperlink)
+    # See example 4: shorturl.at/bDQWY
     final_bake_dict = {k: v for (k, v) in to_bake_dict.items() if v != 0}
     print("Full list of items required for baking:\n")
     # Pretty-print the dict for legibility in the terminal
