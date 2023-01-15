@@ -484,11 +484,51 @@ Functions that perfom actions that the user never sees are marked with '(H)'.
 
 ---
 
-## Validation
+## Validation and Version Control
 
-- VS Code linter
+I setup my working environment to make validation easier. Fist, as Python uses
+ indentation in codeblocks, I used a VS Code extension to highlight indentation
+ levels and marks errors in red.
 
-- CI PEP8 linter
+I made use of VS Code's 'format on save' feature to handle much of the spacing
+ requirements for the code. After enabling Python linting in my IDE, I could
+ catch any formatting errors as they happened any utilize any suggestions
+ provided.
+
+I made sure to familiarize myself with [PEP8](https://peps.python.org/pep-0008/)
+ \- the official Python Style guide. Python is especially stringent on column
+  count. I set up rulers in my IDE at cols 72, 79 and 80 so I had a visual
+  reference for the bounds to keep my code and comments in.
+
+Many inline comments were provided to give context to vars and functions. As per
+ the style guide, I made no comments past col 72. I used a
+ [URL Shortener](https://www.shorturl.at/) in instances where a hyperlink was
+ provided that would break the line limit. These links can easily be followed in
+ VS Code with `ctrl+click`.
+
+Comments were very granular, so that others or my future self can make sense of
+ the code, whilst referencing any relevant sources provided. Each function was
+ provided a docstring, which functions as a large comment to give context to
+ the function it is appended to. Pertinent information such as function
+ requirements and parameter descriptions can be found in each docstring.
+
+By following best practice guidelines throughout development, my code has fully
+ passed through the [CI Python Linter](https://pep8ci.herokuapp.com/) with 0
+ issues:
+
+![CI Linter]
+
+I have continued to implement the
+ [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+ guidelines for commit messages. The commits are well defined, with additional
+ comments provided to flesh out the details, such as 
+ [commit 552f830](https://github.com/jts272/pp3-lidl-bake-mate/commit/552f830cff373d93179d929974c22ae41622fae5).
+ GitHub users can also comment on commits. I have used this feature in
+ [commit 607eb6b](https://github.com/jts272/pp3-lidl-bake-mate/commit/607eb6bdac9053b2eaf62b17b2a1e0d7bc8f57e1).
+ Look out for ellipses and speech bubbles in my
+ [full commit history](https://github.com/jts272/pp3-lidl-bake-mate/commits/main)
+
+---
 
 ## Bugs
 
@@ -584,8 +624,6 @@ Functions that perfom actions that the user never sees are marked with '(H)'.
 - Self-explanatory readme
 
 ---
-
-## Version Control
 
 ## Deployment
 
