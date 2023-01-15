@@ -52,34 +52,30 @@ def run_intro():
     """
     # Print statement show necessary information to the user for program
     # operation. Dividing lines aid visual clarity
-    print("<=======================================================>\n")
-    print("Welcome to Lidl BakeMate!\n")
-    print(
-        "This program will efficiently calculate your afternoon bakery "
-        "requirements\n")
-    print(
-        "Simply enter the date and BakeMate will guide you through the "
-        "input process\n")
-    print(
-        "BakeMate will ask you to provide you current stock on hand values "
-        "for each line in the bakery. Input is broken down by bakery section. "
-        "You will have the chance to review your figures entered before "
-        "moving to the next section.\n")
-    print(
-        "When all programs are confirmed, your figures will be sent to the "
-        "database. You will be provided with a list of lines required to bake "
-        "at the end of the program.\n")
-    print(
-        "The full database can be accessed at the following address if "
-        "required:")
-    print("shorturl.at/pqrS3\n")
-    print("Full documentation for program use can be found here:")
-    print("https://github.com/jts272/pp3-lidl-bake-mate\n")
-    print(
-        "This program is not endorsed or affiliated with Lidl GB and is "
-        "presented for educational purposes.\n")
-    print("Coded by Joseph Smith (c) 2023\n")
-    print("<=======================================================>\n")
+    print("<================================================================>")
+    print()
+    print("Welcome to Lidl BakeMate! Coded by Joseph Smith (c) 2023")
+    print()
+    print("BakeMate easily calculates your afternoon bakery requirements")
+    print()
+    print("BakeMate will ask you to provide the date, followed by stock on ")
+    print("hand levels for each line. Input is broken down by program type.")
+    print("You will have the chance to review your figures before proceeding.")
+    print()
+    print("Once entries are confirmed, they will be sent to the database and ")
+    print("recorded. BakeMate will then provide you with your lines to bake")
+    print()
+    print("The full database can be accessed at the following URL:")
+    print("shorturl.at/pqrS3")
+    print()
+    print("Documentation on program usage and development can be found here:")
+    print("https://github.com/jts272/pp3-lidl-bake-mate")
+    print()
+    print("This program is not endorsed or affiliated with Lidl GB and is ")
+    print("presented for educational purposes.")
+    print()
+    print("<================================================================>")
+    print()
 
     # Loop awaits user input to confirm they are ready to use the
     # program
