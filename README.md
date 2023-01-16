@@ -384,29 +384,30 @@ Each goal is addressed with an explanation of how the goal was facilitated.
 Client goals:
 
 - Increase operational efficiency in daily afternoon bake task
+   :heavy_check_mark:
   - The program allows staff to complete a daily task in a logical manner, which
-     produces the desired numerical result :heavy_check_mark:
+     produces the desired numerical result
 - Aid KPIs by generating correct figures - e.g. only baking what is required
+   :heavy_check_mark:
   - Human error is reduced as the program handles all arithmetic so procedures
-    are followed accurately :heavy_check_mark:
+    are followed accurately
 - To make the task accessible to all staff, regardless of mathematical ability
+   :heavy_check_mark:
   - The program flow is made clear so can be used with little need for training
-     or mathematical ability :heavy_check_mark:
-- To further aid the push to paperless working
+     or mathematical ability
+- To further aid the push to paperless working :heavy_check_mark:
   - The program moves a pen and paper task to the ACD and keeps electronic
-     records in the spreadsheet :heavy_check_mark:
+     records in the spreadsheet
 
 User goals:
 
-- To perform the daily afternoon bake task more efficiently
+- To perform the daily afternoon bake task more efficiently :heavy_check_mark:
   - The user is guided through the progam, needing only to enter numbers to the
-    terminal :heavy_check_mark:
-- To have confidence that their bake plan is correct
+    terminal
+- To have confidence that their bake plan is correct :heavy_check_mark:
   - All arithmetic is handled by the program and all input must be confirmed
-     :heavy_check_mark:
-- To have a frictionless experience in performing their task
+- To have a frictionless experience in performing their task :heavy_check_mark:
   - The program is simple, self explanatory and has user-friendly flow
-     :heavy_check_mark:
 
 ### Function Testing
 
