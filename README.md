@@ -238,20 +238,27 @@ A confirmation prompt is provided, which is a returning theme throughout the
  subsequent features. From here, the program moves to the foundational function
  from which the rest of the program's data is based upon.
 
-![func Intro]
+![func Intro](images/screenshots/func-intro.png)
 
 ### Date Input
 
 Much like other date-sensitive tasks, the user is first required to input the
  date:
 
-![func Date input]
+![func Date input](images/screenshots/func-date-input.png)
 
 Exceptions are handled in the event that the user submits a date that is not
  valid, or a past date that the program and database already have data for. Note
  that this does not invlove Python date objects. The user is prompted to enter a
  string *in a specified date format* which correlates to how the Google Sheet is
  set up. Of further note is that user input on the ACD is numerical.
+
+![func Past date](images/screenshots/func-past-date.png)
+
+<details>
+<summary>ACD date out of range</summary>
+<img src="images/acd/acd-bad-date.jpg">
+</details>
 
 If users enter a text string, then they are notified that no data is available.
  If a past date is provided, they are notified of the most recent date
@@ -260,14 +267,11 @@ If users enter a text string, then they are notified that no data is available.
  date as the spreadsheet would always be updated with the lastest worksheet from
  the Head Office side.
 
-![func Past date]
-
-<details>
-<summary>ACD date out of range</summary>
-<img src="images/acd/acd-bad-date.jpg">
-</details>
+![func String date](images/screenshots/func-string-date.png)
 
 On successful date input, the program proceeds to the stock entry function.
+
+![func Successful date](images/screenshots/func-date-success.png)
 
 ### Stock Input
 
@@ -275,7 +279,7 @@ The user inputs the stock on hand for a given line, in a given product group.
  Bakery products in-store are also merchandised in a manner that resembles their
  respective baking program.
 
-![func Item entry]
+![func Stock input](images/screenshots/func-stock-input.png)
 
 The choice was made to break the input down into sections. In this way, the user
  can confirm their entries in subsections, rather than having to submit values
@@ -286,16 +290,18 @@ At the end of each subsection, the user is presented with their inputs per line.
  They are given the choice to confirm that their entries are correct, by which
  they can continue to the next program's stock entries.
 
-![func Confirm program input]
+![func Stock input confirm](images/screenshots/func-stock-input-confirm.png)
+
+![func Stock next group](images/screenshots/func-stock-next-group.png)
 
 If the user selects 'N', the current subsection's input request will repeat:
 
-![func Deny program input]
+![func Stock re-entry](images/screenshots/func-stock-re-entry.png)
 
 In the event that the 'Y' or 'N' input is not recognized, the program will ask
  for user input for the program again, to rule out errors defensively.
 
-![func Bad input repeat]
+![func Stock bad input repeat](images/screenshots/func-stock-bad-input-repeat.png)
 
 ### Final Stock Confirmation
 
@@ -304,14 +310,16 @@ All of the user's inputs by program are presented in a final list of 'Item' :
  submission to the database. The user is informed that this will be the next
  action:
 
-![func Final confirm]
+![func Final confirm](images/screenshots/func-final-confirm.png)
 
 When the user confirms their values, the data submission and display final
  figures display functions will run. However, if the user selects 'N', they are
  given a clear choice to either return with their current values or restart the
  program. In this event, all user input is recollected.
 
-![func Restart program]
+![func Restart program](images/screenshots/func-restart-program.png)
+
+![func Restarting](images/screenshots/func-restarting.png)
 
 ### Update Worksheets
 
@@ -319,9 +327,14 @@ When the user confirms their complete entries, these figures are sent to the
  worksheet by the API. It is shown to the user which values are being sent and
  which worksheet is being updated.
 
-![func Update stock on hand sheet]
+![func Update sheets](images/screenshots/func-update-sheets.png)
 
-![func Update stock to bake sheet]
+<details>
+<summary>Updated worksheet</summary>
+<img src="images/sheets/sheet-updated.png">
+</details>
+
+
 
 ### Display Final Stock to Bake
 
@@ -329,12 +342,9 @@ Finally, the user is presented with the list of stock they are required to bake.
  Crucially, any lines that require 0 items to be baked are excluded from this
  list using conditional logic. This presents a clean, essential list for the
  user to continue with their next task with exactly the information they need.
+ The user is thanked for their input and notified that the program has finished.
 
-![func Display final results]
-
-The user is thanked for their input and notified that the program has finished.
-
-![func End of program]
+![func Final results](images/screenshots/func-final-results.png)
 
 ---
 
