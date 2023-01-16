@@ -43,7 +43,7 @@ Furthermore, this program would bolster Lidl's overall push for paperless
 
 <details>
 <summary>ACD device image</summary>
-<img src="images/acd/acd.base.jpg">
+<img src="images/acd/acd-base.jpg">
 </details>
 
 This handheld device is fundamental to store operation through a range of 
