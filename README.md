@@ -686,13 +686,103 @@ but never exposed as project files are pushed to GitHub.
 
 ## Deployment
 
-- GitHub
+Heroku was the platform chosen to host the program, for its cabability for
+ hosting dynamic content. My code was used alongside the
+  [CI Python template](https://github.com/Code-Institute-Org/ython-essentials-template)
+  to produce the 'mock-terminal' effect found on the deployed site. This allows users to interact with the code directly, much like running the `run.py` file in an IDE.
 
-- Heroku
+There were several steps to deploying this project, which are more involved than
+ simply
+ [deploying to GitHub Pages.](https://github.com/jts272/pp2-license-to-quiz#deployment-cloning--forking)
+ By following these steps *in order*, you may publish a similar application to
+ the web.
 
-  - Dependencies
+In `run.py` (or the name of the file(s) running the program logic):
+
+1. Ensure any `input` elements are suffixed with a newline `\n` char.
+2. Generate a list of requirements for Heroku. These are the dependencies used
+   in the Gitpod VS Code workspace. To generate, ensure there is a
+   `requirements.txt` file in your project root. Then enter 
+   `pip3 freeze > requirements.txt` into your terminal. This will build a list
+   of dependencies that Heroku will use to build the project. The file generated
+   for this project looked like this:
+
+![Requirements file](images/pp3-pip3-freeze.png)
+
+3. Ensure that these files are all saved, committed and *pushed* so that Heroku
+   can use these files later.
+
+In [Heroku](https://id.heroku.com/login):
+
+1. Login or Sign up - you may need to activate your
+ [GitHub Student Pack](https://www.heroku.com/github-students) if applicable.
+2. Ensure that your account is set up correctly and your Eco Dynos plan is
+   active in Heroku - contact your learning institution for more information.
+3. Select 'Create new app' from your Heroku Dashboard.
+4. Create a unique name for your app and select your region. Select 'Create 
+    app'.
+
+In the 'Settings' tab of the project dashboard:
+
+1. Select 'Reveal Config Vars'. Here you will add KEY:VALUE pairs to adjust app
+    behaviour. Remember that there is an untracked file in the project
+    containing credentials for API function. This can be added by following
+    steps 2 and 3, if required in your project.
+2. In 'KEY', enter `CREDS`.
+3. In 'VALUE', paste in the text content of your `CREDS.json` file. Select 'Add'
+4. Repeat this process with a KEY:VALUE pair of `PORT` and `8000`. This is
+    necessary regardless of your program's use of credentials.
+
+Your results should appear like this:
+
+![Config vars](images/pp3-config-vars.png)
+
+5. Select 'Add buildpack'. Add the following buildpack *in order.* These can be
+    re-ordered by drag-and-drop if needed.
+6. python
+7. nodejs
+
+Compare with the image below:
+
+![Buildpacks](images/pp3-buildpacks.png)
+
+In the 'Deploy' tab of the project dashboard:
+
+1. In 'Deployment method', select 'GitHub' and follow the prompts to connect.
+    You will need to use the seach field to locate the appropriate repository.
+2. When the correct repo is located, select 'Connect'.
+3. Finally, select 'Deploy Branch' at the bottom of the page. A build log will
+    begin running. A link will be provided to the site after this process.
+
+The Heroku page should appear like this:
+
+![Heroku Deployed](images/pp3-heroku-deployed.png)
+
+4. Select 'View' here, or 'Open app' from the project dashboard at any time.
+
+## Cloning & Forking
+
+Steps as in [My previous project](https://github.com/jts272/pp2-license-to-quiz)
+
+How to Clone:
+
+- Select the green 'Code' dropdown button
+- Copy the HTTPS link to the clipboard
+- Type git clone followed by the copied link in your repository terminal
+- The project files will download to your working directory
+
+How to Fork:
+
+- Log in/Sign up to GitHub
+- Select 'Fork' from the top right corner
+
+---
 
 ## Technologies Used
+
+[Code Institute Python Template](https://github.com/Code-Institute-Org/python-essentials-template)
+\- This formed the foundation for the project, which integrated with the CI mock
+terminal that the project is presented in.
 
 IDE - VS Code in Gitpod
 
@@ -706,18 +796,21 @@ Deployment Platform - Heroku
 
 Python Libraries imported and installed:
 
-[pprint.pprint](https://docs.python.org/3/library/pprint.html) - 'Pretty-print'
- dict and list data in the terminal
+- [pprint.pprint](https://docs.python.org/3/library/pprint.html) - 'Pretty-print'
+  dict and list data in the terminal
 
-[time.sleep](https://docs.python.org/3/library/time.html?highlight=time%20sleep#time.sleep) - 
-[Add delay to a function](https://github.com/jts272/pp3-lidl-bake-mate/commit/7ae2397721fb83bd3b62760b43e5788060e40099)
- so the user can see what is happening when the program is restarted
+- [time.sleep](https://docs.python.org/3/library/time.html?highlight=time%20sleep#time.sleep) - 
+  [Add delay to a function](https://github.com/jts272/pp3-lidl-bake-mate/commit/7ae2397721fb83bd3b62760b43e5788060e40099)
+  so the user can see what is happening when the program is restarted
 
-[gspread](https://docs.gspread.org/en/latest/) - The basis of the Google Sheets
- integration
+- [gspread](https://docs.gspread.org/en/latest/) - The basis of the Google Sheets
+  integration
 
-[google-auth.Credentials](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html)
- \- For authorizing gspread scope in the Google Sheets API
+- [google-auth.Credentials](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html)
+  \- For authorizing gspread scope in the Google Sheets API
+
+- [numpy](https://numpy.org/doc/stable/index.html) - for its
+  [list flattening method](https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html)
 
 ---
 
