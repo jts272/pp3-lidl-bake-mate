@@ -715,7 +715,7 @@ In `run.py` (or the name of the file(s) running the program logic):
    of dependencies that Heroku will use to build the project. The file generated
    for this project looked like this:
 
-![Requirements file](images/pp3-pip3-freeze.png)
+![Requirements file](images/deployment/pp3-pip3-freeze.png)
 
 3. Ensure that these files are all saved, committed and *pushed* so that Heroku
    can use these files later.
@@ -743,7 +743,7 @@ In the 'Settings' tab of the project dashboard:
 
 Your results should appear like this:
 
-![Config vars](images/pp3-config-vars.png)
+![Config vars](images/deployment/pp3-config-vars.png)
 
 5. Select 'Add buildpack'. Add the following buildpack *in order.* These can be
     re-ordered by drag-and-drop if needed.
@@ -752,7 +752,7 @@ Your results should appear like this:
 
 Compare with the image below:
 
-![Buildpacks](images/pp3-buildpacks.png)
+![Buildpacks](images/deployment/pp3-buildpacks.png)
 
 In the 'Deploy' tab of the project dashboard:
 
@@ -764,7 +764,7 @@ In the 'Deploy' tab of the project dashboard:
 
 The Heroku page should appear like this:
 
-![Heroku Deployed](images/pp3-heroku-deployed.png)
+![Heroku Deployed](images/deployment/pp3-heroku-deployed.png)
 
 4. Select 'View' here, or 'Open app' from the project dashboard at any time.
 
