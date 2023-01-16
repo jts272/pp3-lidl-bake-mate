@@ -8,6 +8,11 @@ Program live link - [Heroku](https://pp3-lidl-bake-mate.herokuapp.com/)
 
 Accompanying spreadsheet - [Google Sheets](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
 
+Right/Middle click to open links in a new tab.
+
+The table of contents can be accessed at any time by selecting the list icon
+ next to `README.md` at the top-left of the page.
+
 ---
 
 ## Overview
