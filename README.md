@@ -801,6 +801,8 @@ IDE - VS Code in [Gitpod](https://www.gitpod.io/)
 
 Deployment Platform - [Heroku](https://www.heroku.com/)
 
+Flowchart Editor - [Lucid Charts](https://www.lucidchart.com/pages/)
+
 Language - Python 3.8.11
 
 Python Libraries - latest versions imported and installed from terminal:
