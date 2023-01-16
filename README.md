@@ -1,8 +1,10 @@
 # Lidl BakeMate Python Terminal Application
 
-![Lidl Bakery Items]
+![Lidl Bakery Items](images/pp3-header.jpg)
 
-Live link - [Heroku](https://pp3-lidl-bake-mate.herokuapp.com/)
+[Image source](https://www.lidl.co.uk/our-products/bakery)
+
+Program live link - [Heroku](https://pp3-lidl-bake-mate.herokuapp.com/)
 
 Accompanying spreadsheet - [Google Sheets](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
 
@@ -39,7 +41,10 @@ Furthermore, this program would bolster Lidl's overall push for paperless
 
 ### ACD
 
-![ACD]
+<details>
+<summary>ACD device image</summary>
+<img src="images/acd/acd.base.jpg">
+</details>
 
 This handheld device is fundamental to store operation through a range of 
 data-driven processes. Input consists of:
@@ -48,7 +53,7 @@ data-driven processes. Input consists of:
 - Enter key (red)
 - Clear key ('C')
 - Up/down keys (to scroll through lists)
-- Function keys (top row)
+- Function keys ('F' and top row shortcut keys)
 - Context prompts on touch screen (Yes, No, Back, etc.)
 
 The hardware is taken into account in the program. Program input is simple,
@@ -73,9 +78,15 @@ The sheet serves as a reference point for the program to use, much like how
  an item reference sheet and the bakery plan for the given day as its own
  worksheet.
 
-![Item reference]
+<details>
+<summary>Item reference sheet</summary>
+<img src="images/sheets/sheet-item-ref.png">
+</details>
 
-![28-12-22 plan]
+<details>
+<summary>Bake plan for 28-12-22</summary>
+<img src="images/sheets/sheet-28-12-22.png">
+</details>
 
 It is important to note that the naming conventions in the worksheets are
  followed, as the API relies on worksheet data to function. This is reflected in
@@ -114,7 +125,10 @@ It also became clear that the date must be captured, so the program can address
  the correct figures for the particualar day of business. This is common in
  date-sensitive ACD applications:
 
-![ACD date entry]
+<details>
+<summary>ACD date entry</summary>
+<img src="images/acd/acd-date-entry.jpg">
+</details>
 
 When all the parts were in place, I jotted down a paper flow chart consisting of
  the functions I would need to code. As each function was operational, I checked
@@ -231,8 +245,6 @@ A confirmation prompt is provided, which is a returning theme throughout the
 Much like other date-sensitive tasks, the user is first required to input the
  date:
 
-![ACD date input]
-
 ![func Date input]
 
 Exceptions are handled in the event that the user submits a date that is not
@@ -250,7 +262,10 @@ If users enter a text string, then they are notified that no data is available.
 
 ![func Past date]
 
-![ACD date out of range]
+<details>
+<summary>ACD date out of range</summary>
+<img src="images/acd/acd-bad-date.jpg">
+</details>
 
 On successful date input, the program proceeds to the stock entry function.
 
