@@ -17,10 +17,10 @@ The table of contents can be accessed at any time by selecting the list icon
 
 ## Overview
 
-Lidl BakeMate is a data-driven Python progam with Google Sheets integration that
- aims to boost productivity in Lidl GB stores. The program requests input from
- the user which is used to perform calculations which increase efficiency in a
- daily task. Data is presented in an accessible format to the user in the
+Lidl BakeMate is a data-driven Python program with Google Sheets integration
+ that aims to boost productivity in Lidl GB stores. The program requests input
+ from the user which is used to perform calculations which increase efficiency
+ in a daily task. Data is presented in an accessible format to the user in the
  terminal, as well as in the integrated worksheet. 
 
 ### Usage Scenario
@@ -127,7 +127,7 @@ Inception of the program involved jotting down on paper the steps of the main
    - In terminal format
 
 It also became clear that the date must be captured, so the program can address
- the correct figures for the particualar day of business. This is common in
+ the correct figures for the particular day of business. This is common in
  date-sensitive ACD applications:
 
 <details>
@@ -235,7 +235,7 @@ Functions are presented here in order of operation, from program start. The
 ### Display Program Introduction
 
 On program start, the user is presented with a text box that serves to get the
- first-time user accquainted with the program. It informs the user what the
+ first-time user acquainted with the program. It informs the user what the
  program does. Links are given so that the user may access the accompanying
  worksheet and this readme document.
 
@@ -254,7 +254,7 @@ Much like other date-sensitive tasks, the user is first required to input the
 
 Exceptions are handled in the event that the user submits a date that is not
  valid, or a past date that the program and database already have data for. Note
- that this does not invlove Python date objects. The user is prompted to enter a
+ that this does not involve Python date objects. The user is prompted to enter a
  string *in a specified date format* which correlates to how the Google Sheet is
  set up. Of further note is that user input on the ACD is numerical.
 
@@ -268,8 +268,8 @@ Exceptions are handled in the event that the user submits a date that is not
 If users enter a text string, then they are notified that no data is available.
  If a past date is provided, they are notified of the most recent date
  available. Remember that this scenario spans a three-day period of time. In
- real-world deployment, the lastest sheet would always give the current days's
- date as the spreadsheet would always be updated with the lastest worksheet from
+ real-world deployment, the latest sheet would always give the current days'
+ date as the spreadsheet would always be updated with the latest worksheet from
  the Head Office side.
 
 ![func String date](images/screenshots/func-string-date.png)
@@ -402,7 +402,7 @@ Client goals:
 User goals:
 
 - To perform the daily afternoon bake task more efficiently :heavy_check_mark:
-  - The user is guided through the progam, needing only to enter numbers to the
+  - The user is guided through the program, needing only to enter numbers to the
     terminal
 - To have confidence that their bake plan is correct :heavy_check_mark:
   - All arithmetic is handled by the program and all input must be confirmed
@@ -420,7 +420,7 @@ All instances of inputting a single letter in menus has been programmed and
 Common to all functions was the testing of args working as intended, and vars
  being correctly displayed to the user in print/input elements.
 
-Functions that perfom actions that the user never interacts with directly are
+Functions that perform actions that the user never interacts with directly are
  marked with :see_no_evil:
 
 #### API Functionality
@@ -522,7 +522,7 @@ Functions that perfom actions that the user never interacts with directly are
 ## Validation and Version Control
 
 I setup my working environment to make validation easier. First, as Python uses
- indentation in codeblocks, I used a VS Code extension to highlight indentation
+ indentation in code blocks, I used a VS Code extension to highlight indentation
  levels and marks errors in red.
 
 I made use of VS Code's 'format on save' feature to handle much of the spacing
@@ -552,6 +552,8 @@ By following best practice guidelines throughout development, my code has fully
  issues:
 
 ![CI Linter](images/pp3-validation.png)
+
+This can be verified by pasting in the content of `run.py` into the link above.
 
 I have continued to implement the
  [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
@@ -595,7 +597,7 @@ I have continued to implement the
 - Not displaying full results in final list of items to bake:
   - Check correct A1 notation argument for cells to reference in worksheet
 
-- pprint shows artifacts from f strings:
+- pprint shows artefacts from f strings:
   - Known issue - don't use f strings with pprint. Use separate, surrounding
     print statements
 
@@ -692,7 +694,7 @@ but never exposed as project files are pushed to GitHub.
 
 ## Deployment
 
-Heroku was the platform chosen to host the program, for its cabability for
+Heroku was the platform chosen to host the program, for its capability for
  hosting dynamic content. My code was used alongside the
   [CI Python template](https://github.com/Code-Institute-Org/ython-essentials-template)
   to produce the 'mock-terminal' effect found on the deployed site. This allows users to interact with the code directly, much like running the `run.py` file in an IDE.
@@ -828,6 +830,9 @@ All credit has been provided inline in the `run.py` file as appropriate. I would
  right direction in an easy to follow format. I found reading Robert Greene's
  [The Daily Laws](https://www.goodreads.com/book/show/57565805-the-daily-laws)
  a great source of energy when thinking about how to bring the project to life.
+ I would also like to credit my mentor Anthony Ugwu, for his multiline print
+ refactor suggestion. He also helped in thinking about how to break functions
+ down to even smaller parts to aid testing and function in future projects.
 
 I had considered a secondary function to make, using OOP, to provide information 
  to the user on the properties of all bakery items. This would include further
