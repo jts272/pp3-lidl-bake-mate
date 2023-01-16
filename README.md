@@ -569,47 +569,65 @@ I have continued to implement the
 
 ## Bugs
 
-- Append to list if invalid data:
-  - Append inside if block
+Testing was thorough during development. I would note down any bugs that occured
+ during the design of each function. I would then search for ways to remedy the
+ function's behaviour and test again. The final program performs its intended
+ function with no obvious issues.
 
-- Final list appending items separately instead of making one big list:
-  - Use `.extend()` not `.append()`
+B = Bug
 
-- var only holding first sum when calculating stock to bake:
-  - `calculation = [(required - on_hand)]` enclose var in list brackets
+F = Fix
 
-- Returned stock list only returning one number, not a list:
-  - append to new list inside `for` loop
+- B: List items being appended even if invalid:
+  - F: Append inside if block
 
-- Unable to use `<` operand between string and int:
-  - Don't use list comprehension for different data types. Use `if` condition
-    before append
+- B: Final list appending items separately instead of making one big list:
+  - F: Use `.extend()` not `.append()`
 
-- List keeps appending values when function is restarted:
-  - use `list.clear()` method in `if` statement
+- B: var only holding first sum when calculating stock to bake:
+  - F: Enclose var in list brackets: `calculation = [(required - on_hand)]`
 
-- f string too long to access `{var}`:
-  - use f strings on multiple lines in parentheses
+- B: Returned stock list only returning one number, not a list:
+  - F: Append to new list from inside `for` loop
 
-- Unable to zip item list:
-  - use numpy `.concatenate()` method to flatten the list
+- B: Unable to use `<` operand between string and int:
+  - F: Don't use list comprehension for different data types. Use `if` conditional check 
+       before appending
 
-- Not displaying full results in final list of items to bake:
-  - Check correct A1 notation argument for cells to reference in worksheet
+- B: List keeps appending values when function is restarted:
+  - F: Use `list.clear()` method in `if` statement
 
-- pprint shows artefacts from f strings:
-  - Known issue - don't use f strings with pprint. Use separate, surrounding
-    print statements
+- B: f string too long to access `{var}`:
+  - F: Use f strings on multiple lines in parentheses
 
-- Dictionaries displayed alphabetically when pprinted:
-  - Use `sort_dicts=False` argument when pprinting a dict where insertion order
-    is required to be retained
+- B: Unable to zip item list:
+  - F: Use numpy `.concatenate()` method to flatten the list of list items into
+       one list.
 
-- Typing `...` at the end of an f string causes it to not display:
-  - VS Code complained of an 'instance string'. Made new line for asterisk
+- B: Not displaying full results in final list of items to bake:
+  - F: Check correct A1 notation argument for cells to reference in worksheet
 
-- Infinite `while` loop in intro function:
-  - Missing `()` on `user_input.lower()` so input could never be matched
+- B: pprint shows artefacts from f strings:
+  - F: Known issue - don't use f strings with pprint. Use separate, surrounding
+        print statements
+
+- B: Dictionaries displayed alphabetically when pprinted:
+  - F: Use `sort_dicts=False` argument when pprinting a dict where insertion
+       order is required to be retained
+
+- B: Typing `...` at the end of an f string causes it to not display:
+  - F: VS Code complained of an 'instance string'. Made new print statement on
+        next line to display the text asterisk
+
+- B: Infinite `while` loop in intro function:
+  - F: Missing `()` on `user_input.lower()` so input could never be matched
+
+### Known Issues
+
+There is a rare instance where the 'return or restart' prompt re-appears if the
+ program is completed after the user selects the restart option. This does not
+ affect the function of the program or API, which manifests merely as a visual
+ quirk.
 
 ---
 
