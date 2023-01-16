@@ -370,26 +370,28 @@ Client goals:
 
 - Increase operational efficiency in daily afternoon bake task
   - The program allows staff to complete a daily task in a logical manner, which
-     produces the desired numerical result
+     produces the desired numerical result :heavy_check_mark:
 - Aid KPIs by generating correct figures - e.g. only baking what is required
   - Human error is reduced as the program handles all arithmetic so procedures
-    are followed accurately
+    are followed accurately :heavy_check_mark:
 - To make the task accessible to all staff, regardless of mathematical ability
   - The program flow is made clear so can be used with little need for training
-     or mathematical ability
+     or mathematical ability :heavy_check_mark:
 - To further aid the push to paperless working
   - The program moves a pen and paper task to the ACD and keeps electronic
-     records in the spreadsheet
+     records in the spreadsheet :heavy_check_mark:
 
 User goals:
 
 - To perform the daily afternoon bake task more efficiently
   - The user is guided through the progam, needing only to enter numbers to the
-    terminal
+    terminal :heavy_check_mark:
 - To have confidence that their bake plan is correct
   - All arithmetic is handled by the program and all input must be confirmed
+     :heavy_check_mark:
 - To have a frictionless experience in performing their task
   - The program is simple, self explanatory and has user-friendly flow
+     :heavy_check_mark:
 
 ### Function Testing
 
@@ -403,7 +405,7 @@ Common to all functions was the testing of args working as intended, and vars
  being correctly displayed to the user in print/input elements.
 
 Functions that perfom actions that the user never interacts with directly are
- marked with '(H)'.
+ marked with :see_no_evil:
 
 #### API Functionality
 
@@ -426,13 +428,13 @@ Functions that perfom actions that the user never interacts with directly are
    :heavy_check_mark:
 - The function returns reference to the desired sheet :heavy_check_mark:
 
-#### Get Stock Required Function (H)
+#### Get Stock Required Function :see_no_evil:
 
 - The correct col is selected for the sheet, based on arg supplied
    :heavy_check_mark:
 - Desired list is returned in the correct format :heavy_check_mark:
 
-#### Separate Items by Program Function (H)
+#### Separate Items by Program Function :see_no_evil:
 
 - vars given global scope are accessible by other functions :heavy_check_mark:
 - dict created inside function has desired values :heavy_check_mark:
@@ -457,7 +459,7 @@ Functions that perfom actions that the user never interacts with directly are
 - Input proceeds correctly by program group after confirmation, based off args
    supplied at function call :heavy_check_mark:
 
-#### Combine Program Lists Function (H)
+#### Combine Program Lists Function :see_no_evil:
 
 - *args are combined in insertion order, to form one continuous list
    :heavy_check_mark:
@@ -486,7 +488,7 @@ Functions that perfom actions that the user never interacts with directly are
    function args :heavy_check_mark:
 
 
-#### Calculate Items to Bake Function (H)
+#### Calculate Items to Bake Function :see_no_evil:
 
 - args passed in work with mathematical operators such as `-` :heavy_check_mark:
 - Conditional logic adjusts negative ints to '0' :heavy_check_mark:
