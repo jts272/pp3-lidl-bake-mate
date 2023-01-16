@@ -221,7 +221,7 @@ Furthermore, at each step, I would consider text formatting and how to best
 
 Below is the main function flow chart as seen in the deployed program:
 
-  - ![Main flow chart]
+![Main flow chart](images/pp3-flowchart.png)
 
 ---
 
@@ -339,8 +339,6 @@ When the user confirms their complete entries, these figures are sent to the
 <img src="images/sheets/sheet-updated.png">
 </details>
 
-
-
 ### Display Final Stock to Bake
 
 Finally, the user is presented with the list of stock they are required to bake.
@@ -350,22 +348,6 @@ Finally, the user is presented with the list of stock they are required to bake.
  The user is thanked for their input and notified that the program has finished.
 
 ![func Final results](images/screenshots/func-final-results.png)
-
----
-
-## Full Function Flow Charts
-
-![Intro flow]
-
-![Date flow]
-
-![Input flow]
-
-![Confirm flow]
-
-![Update flow]
-
-![Results flow]
 
 ---
 
@@ -569,10 +551,8 @@ I have continued to implement the
 
 ## Bugs
 
-Testing was thorough during development. I would note down any bugs that occured
- during the design of each function. I would then search for ways to remedy the
- function's behaviour and test again. The final program performs its intended
- function with no obvious issues.
+Testing was thorough during development. I would note down any bugs that
+ occurred during the design of each function. I would then search for ways to remedy the function's behaviour and test again. The final program performs its intended function with no obvious issues.
 
 B = Bug
 
@@ -810,17 +790,20 @@ How to Fork:
 \- This formed the foundation for the project, which integrated with the CI mock
 terminal that the project is presented in.
 
-IDE - VS Code in Gitpod
+IDE - VS Code in [Gitpod](https://www.gitpod.io/)
 
-Google Account Services for API integration:
+[Google Account](https://www.google.com/account/about/?hl=en-US) Services for
+ API integration:
 
 - Google Cloud
 - Google Sheets
 - Google Drive
 
-Deployment Platform - Heroku
+Deployment Platform - [Heroku](https://www.heroku.com/)
 
-Python Libraries imported and installed:
+Language - Python 3.8.11
+
+Python Libraries - latest versions imported and installed from terminal:
 
 - [pprint.pprint](https://docs.python.org/3/library/pprint.html) - 'Pretty-print'
   dict and list data in the terminal
