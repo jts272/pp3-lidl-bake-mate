@@ -545,7 +545,7 @@ By following best practice guidelines throughout development, my code has fully
  passed through the [CI Python Linter](https://pep8ci.herokuapp.com/) with 0
  issues:
 
-![CI Linter]
+![CI Linter](images/pp3-validation.png)
 
 I have continued to implement the
  [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
