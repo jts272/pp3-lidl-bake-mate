@@ -41,8 +41,8 @@ Furthermore, this program would bolster Lidl's overall push for paperless
 
 ![ACD]
 
-This handheld device is fundamental to store operation through a range of data-
-driven processes. Input consists of:
+This handheld device is fundamental to store operation through a range of 
+data-driven processes. Input consists of:
 
 - Numerical keypad
 - Enter key (red)
@@ -58,7 +58,7 @@ The hardware is taken into account in the program. Program input is simple,
 
 ### Google Sheets Integration
 
-[Please refer to the program's accompanying spreadsheed](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
+[Please refer to the program's accompanying spreadsheet](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
 
 Bake plans are sent to each store by the internal Back Office system. The Google
  Sheet functions to replicate this database. In the deployed program, the sheet
@@ -146,7 +146,7 @@ Two parties are referenced in the following user stories:
 Client goals:
 
 - Increase operational efficiency in daily afternoon bake task
-- Aid KPI's by generating correct figures - e.g. only baking what is required
+- Aid KPIs by generating correct figures - e.g. only baking what is required
 - To make the task accessible to all staff, regardless of mathematical ability
 - To further aid the push to paperless working
 
@@ -356,8 +356,9 @@ Client goals:
 - Increase operational efficiency in daily afternoon bake task
   - The program allows staff to complete a daily task in a logical manner, which
      produces the desired numerical result
-- Aid KPI's by generating correct figures - e.g. only baking what is required
-  - Human error is reduced as the program handles all arithmetic
+- Aid KPIs by generating correct figures - e.g. only baking what is required
+  - Human error is reduced as the program handles all arithmetic so procedures
+    are followed accurately
 - To make the task accessible to all staff, regardless of mathematical ability
   - The program flow is made clear so can be used with little need for training
      or mathematical ability
@@ -666,18 +667,57 @@ but never exposed as project files are pushed to GitHub.
 
 ## Technologies Used
 
-- Libraries
+IDE - VS Code in Gitpod
 
-## Additional Credits & Resources
+Google Account Services for API integration:
 
-- Credit in addition to those inline in `run.py`
+- Google Cloud
+- Google Sheets
+- Google Drive
 
-## Future Design Ideas
+Deployment Platform - Heroku
 
-- Real world implementation ideas
+Python Libraries imported and installed:
 
-## Closing Words
+[pprint.pprint](https://docs.python.org/3/library/pprint.html) - 'Pretty-print'
+ dict and list data in the terminal
 
-- Achievements
+[time.sleep](https://docs.python.org/3/library/time.html?highlight=time%20sleep#time.sleep) - 
+[Add delay to a function](https://github.com/jts272/pp3-lidl-bake-mate/commit/7ae2397721fb83bd3b62760b43e5788060e40099)
+ so the user can see what is happening when the program is restarted
 
-- Lessons learned
+[gspread](https://docs.gspread.org/en/latest/) - The basis of the Google Sheets
+ integration
+
+[google-auth.Credentials](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html)
+ \- For authorizing gspread scope in the Google Sheets API
+
+---
+
+## Credits, Future Ideas and Closing Words
+
+All credit has been provided inline in the `run.py` file as appropriate. I would
+ however especially like to draw attention to the
+ [bobbyhadz blog](https://bobbyhadz.com/), which always seemed to put me in the
+ right direction in an easy to follow format. I found reading Robert Greene's
+ [The Daily Laws](https://www.goodreads.com/book/show/57565805-the-daily-laws)
+ a great source of energy when thinking about how to bring the project to life.
+
+I had considered a secondary function to make, using OOP, to provide information 
+ to the user on the properties of all bakery items. This would include further
+ information such as PLU (product look up) code and baking time. This would
+ allow the staff member to have a reference guide to learn more about the
+ products. Alternatively, a var could be inserted to show the PLU alongside the
+ item in question when getting user input. The user would learn by repetition of
+ seeing the number next to the associated item each time they complete the
+ program. This data can easily be pulled from the spreadsheet, which has a
+ dedicated item reference sheet that is already in use. This would allow the
+ data to be dynamically updated 'from the other side'. Imagine an item PLU code
+ being changed. The program would still reference the relevant sheet  cell -
+ only the content will have changed.
+
+ Overall, I decided that working with a familiar process and dataset would
+ provide a great environment for me to get comfortable with pure Python
+ programming. I enjoyed the challenge of thinking through the problems and
+ designing solutions. I intend to take these concepts with me as I return to
+ working with JavaScript or any future programming languages.
