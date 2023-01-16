@@ -50,30 +50,32 @@ def run_intro():
     This function introduces the user to the application and notifies
     them of program scope.
     """
-    # Print statement show necessary information to the user for program
-    # operation. Dividing lines aid visual clarity
-    print("<================================================================>")
-    print()
-    print("Welcome to Lidl BakeMate! Coded by Joseph Smith (c) 2023")
-    print()
-    print("BakeMate easily calculates your afternoon bakery requirements.")
-    print()
-    print("BakeMate will ask you to provide the date, followed by stock on ")
-    print("hand levels for each line. Input is broken down by program type.")
-    print("You will have the chance to review your figures before proceeding.")
-    print()
-    print("Once entries are confirmed, they will be sent to the database and ")
-    print("recorded. BakeMate will then provide you with your lines to bake.")
-    print()
-    print("The full database can be accessed here: shorturl.at/pqrS3")
-    print()
-    print("Program documentation is available here: shorturl.at/cden2")
-    print()
-    print("This program is not endorsed or affiliated with Lidl GB and is ")
-    print("presented for educational purposes.")
-    print()
-    print("<================================================================>")
-    print()
+    # Multiline print statement show necessary information to the user for
+    # program operation. Dividing lines aid visual clarity
+    print('''
+<=============================================================================>
+
+Welcome to Lidl BakeMate! Coded by Joseph Smith (c) 2023.
+
+BakeMate easily calculates your afternoon bakery requirements.
+
+BakeMate will ask you to provide the date, followed by stock on hand levels for
+each line. Input is broken down by program type.
+
+You will have the chance to review your figures before proceeding.
+
+Once entries are confirmed, they will be sent to the database and recorded.
+BakeMate will then provide you with your lines to bake.
+
+The full database can be accessed here: shorturl.at/pqrS3
+
+Program documentation is available here: shorturl.at/cden2
+
+This program is not endorsed or affiliated with Lidl GB and is presented for
+educational purposes.
+
+<=============================================================================>
+    ''')
 
     # Loop awaits user input to confirm they are ready to use the
     # program
@@ -86,7 +88,9 @@ def run_intro():
             print("Input not recognized!\n")
             continue
 
-    print("<========================================================\n")
+    print('''
+<=============================================================================>
+    ''')
 
 
 def get_worksheet_from_input():
