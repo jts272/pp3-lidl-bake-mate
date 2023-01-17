@@ -19,14 +19,14 @@ The table of contents can be accessed at any time by selecting the list icon
 
 Lidl BakeMate is a data-driven Python program with Google Sheets integration
  that aims to boost productivity in Lidl GB stores. The program requests input
- from the user which is used to perform calculations which increase efficiency
+ from the user which is used to perform calculations that increase efficiency
  in a daily task. Data is presented in an accessible format to the user in the
  terminal, as well as in the integrated worksheet. 
 
 ### Usage Scenario
 
 Lidl prides itself on its in-store bakery offering. Goods are baked three times
- per day (twice on a Sunday), according to the bake plan for the day - which is
+ per day (twice on a Sunday) according to the bake plan for the day, which is
  unique to the store. Both morning bakes are produced as laid out on the plan.
  However, the third and final bake of the day works differently. Bakery
  co-ordinators jot down their current stock levels for each line at 14:00. From
@@ -71,16 +71,16 @@ The hardware is taken into account in the program. Program input is simple,
 [Please refer to the program's accompanying spreadsheet](https://docs.google.com/spreadsheets/d/1F5qGL73_mbY4tX07SAwo8x-ooswImLdlVWjapZWEyjg/edit#gid=1612631949)
 
 Bake plans are sent to each store by the internal Back Office system. The Google
- Sheet functions to replicate this database. In the deployed program, the sheet
- uses real-world figures from an actual Lidl store operating in the Newton-
-Aycliffe region. Figures are from a three-day span in week 52, 2022. In 
+ Sheet serves to replicate this database. In the deployed program, the sheet
+ uses real-world figures from an actual Lidl store operating in the 
+ Newton-Aycliffe region. Figures are from a three-day span in week 52, 2022. In 
 real-world deployment, there would be ongoing communication between the database
  and program. However, this scenario has simulated as three day period of time
  as a proof-of-concept.
 
 The sheet serves as a reference point for the program to use, much like how
  current in-store staff refer to their paper bakery plans. The sheet contains
- an item reference sheet and the bakery plan for the given day as its own
+ an item reference sheet and bakery plans for the given day as its own
  worksheet.
 
 <details>
@@ -93,7 +93,7 @@ The sheet serves as a reference point for the program to use, much like how
 <img src="images/sheets/sheet-28-12-22.png">
 </details>
 
-It is important to note that the naming conventions in the worksheets are
+It is important to note that the naming conventions in the worksheets must be
  followed, as the API relies on worksheet data to function. This is reflected in
  elements such as worksheet title, cell formatting and insertion of the newest
  sheet last in the overall spreadsheet.
@@ -103,13 +103,13 @@ The item reference sheet contains data on each individual bakery line for the
  to the program flow.
 
 Each day's bake plan has its own worksheet for the program to reference. This
- allows it to provide the correct plan to perform calculations against the
- user's input.
+ allows it to provide the correct plan to the program to perform calculations
+ against the user's input.
 
-The spreadsheet holds the data for past day's entries, as shown for dates 27 and
+The spreadsheet holds the data for past days' entries, as shown for dates 27 and
  28-12-22. In the program scenario, the user is inputting data to calculate
  the lines they need to bake on 29-12-22. After the user confirms their inputs
- are correct, the API updates this worksheet. On the next day of trade, the
+ are correct, the API updates that worksheet. On the next day of trade, the
  user would be working with data for 30-12-22 in a real-world deployment and the
  29-12-22 figures would be complete and serve as a past record.
 
@@ -200,7 +200,7 @@ As my first full terminal program and Python project, my initial goal was to
  simply write the necessary functions in order to produce the ultimate result
  of providing the bake plan. As each function developed, I thought of and tested
  for any errors that may occur from either the API or user input. I would later
- refactor or even rewrite functions in the name of project goals.
+ refactor or even rewrite functions to aid with accomplishing project goals.
 
 For example, it became clear that creating a var for each worksheet would not be
  scalable in a real-world scenario. I had to think of different ways for the
@@ -247,8 +247,8 @@ A confirmation prompt is provided, which is a returning theme throughout the
 
 ### Date Input
 
-Much like other date-sensitive tasks, the user is first required to input the
- date:
+Much like other date-sensitive tasks on the ACD, the user is first required to
+ input the date:
 
 ![func Date input](images/screenshots/func-date-input.png)
 
@@ -256,7 +256,8 @@ Exceptions are handled in the event that the user submits a date that is not
  valid, or a past date that the program and database already have data for. Note
  that this does not involve Python date objects. The user is prompted to enter a
  string *in a specified date format* which correlates to how the Google Sheet is
- set up. Of further note is that user input on the ACD is numerical.
+ set up. Of further note is that user input on the ACD is numerical, which makes
+ this a standard form of input.
 
 ![func Past date](images/screenshots/func-past-date.png)
 
@@ -265,12 +266,12 @@ Exceptions are handled in the event that the user submits a date that is not
 <img src="images/acd/acd-bad-date.jpg">
 </details>
 
-If users enter a text string, then they are notified that no data is available.
+If users enter a text string, then they are notified that no date is available.
  If a past date is provided, they are notified of the most recent date
  available. Remember that this scenario spans a three-day period of time. In
- real-world deployment, the latest sheet would always give the current days'
+ real-world deployment, the latest sheet would always give the current day's
  date as the spreadsheet would always be updated with the latest worksheet from
- the Head Office side.
+ the Head Office database side.
 
 ![func String date](images/screenshots/func-string-date.png)
 
@@ -290,6 +291,7 @@ The choice was made to break the input down into sections. In this way, the user
  can confirm their entries in subsections, rather than having to submit values
  for the full list of 30+ lines before reviewing. This reflects the concept of
  [chunking](https://en.wikipedia.org/wiki/Chunking_(psychology)) in psychology.
+ I made this design choice to aid UX goals.
 
 At the end of each subsection, the user is presented with their inputs per line.
  They are given the choice to confirm that their entries are correct, by which
@@ -354,7 +356,7 @@ Finally, the user is presented with the list of stock they are required to bake.
 ## Testing
 
 This section details what was tested for and the result achieved. Procedures are
-shown for the program functions that were tested. After saving my code, by
+ shown for the program functions that were tested. After saving my code, then by
  entering `python3 run.py` into the terminal, I was able to run my code within
  my IDE. This allowed me to collect instant feedback from these procedures and
  make adjustments as required.
@@ -368,7 +370,7 @@ Client goals:
 - Increase operational efficiency in daily afternoon bake task
    :heavy_check_mark:
   - The program allows staff to complete a daily task in a logical manner, which
-     produces the desired numerical result
+     produces the desired numerical result, every time
 - Aid KPIs by generating correct figures - e.g. only baking what is required
    :heavy_check_mark:
   - Human error is reduced as the program handles all arithmetic so procedures
@@ -394,16 +396,13 @@ User goals:
 ### Function Testing
 
 All instances of inputting a single letter in menus has been programmed and
- tested to work, regardless of being upper or lower case. Text formatting was
+ tested to work regardless of being upper or lower case. Text formatting was
  tested and adjusted before committing each function to GitHub. Factors tested
  included newline insertion, pretty-print behaviour and display behaviour inside
  the Heroku mock-terminal.
 
 Common to all functions was the testing of args working as intended, and vars
  being correctly displayed to the user in print/input elements.
-
-Functions that perform actions that the user never interacts with directly are
- marked with :see_no_evil:
 
 #### API Functionality
 
@@ -426,13 +425,13 @@ Functions that perform actions that the user never interacts with directly are
    :heavy_check_mark:
 - The function returns reference to the desired sheet :heavy_check_mark:
 
-#### Get Stock Required Function :see_no_evil:
+#### Get Stock Required Function
 
 - The correct col is selected for the sheet, based on arg supplied
    :heavy_check_mark:
 - Desired list is returned in the correct format :heavy_check_mark:
 
-#### Separate Items by Program Function :see_no_evil:
+#### Separate Items by Program Function
 
 - vars given global scope are accessible by other functions :heavy_check_mark:
 - dict created inside function has desired values :heavy_check_mark:
@@ -457,7 +456,7 @@ Functions that perform actions that the user never interacts with directly are
 - Input proceeds correctly by program group after confirmation, based off args
    supplied at function call :heavy_check_mark:
 
-#### Combine Program Lists Function :see_no_evil:
+#### Combine Program Lists Function
 
 - *args are combined in insertion order, to form one continuous list
    :heavy_check_mark:
@@ -486,7 +485,7 @@ Functions that perform actions that the user never interacts with directly are
    function args :heavy_check_mark:
 
 
-#### Calculate Items to Bake Function :see_no_evil:
+#### Calculate Items to Bake Function
 
 - args passed in work with mathematical operators such as `-` :heavy_check_mark:
 - Conditional logic adjusts negative ints to '0' :heavy_check_mark:
@@ -505,7 +504,7 @@ Functions that perform actions that the user never interacts with directly are
 
 I setup my working environment to make validation easier. First, as Python uses
  indentation in code blocks, I used a VS Code extension to highlight indentation
- levels and marks errors in red.
+ levels with different colours and marks errors in red.
 
 I made use of VS Code's 'format on save' feature to handle much of the spacing
  requirements for the code. After enabling Python linting in my IDE, I could
@@ -527,7 +526,7 @@ Comments were very granular, so that others or my future self can make sense of
  the code, whilst referencing any relevant sources provided. Each function was
  provided a docstring, which functions as a large comment to give context to
  the function it is appended to. Pertinent information such as function
- requirements and parameter descriptions can be found in each docstring.
+ requirements and parameter descriptions can be found in the docstring.
 
 By following best practice guidelines throughout development, my code has fully
  passed through the [CI Python Linter](https://pep8ci.herokuapp.com/) with 0
@@ -552,14 +551,16 @@ I have continued to implement the
 ## Bugs
 
 Testing was thorough during development. I would note down any bugs that
- occurred during the design of each function. I would then search for ways to remedy the function's behaviour and test again. The final program performs its intended function with no obvious issues.
+ occurred during the design of each function. I would then search for ways to
+ remedy the function's behaviour and test again. The final program performs its
+ intended function with no obvious issues.
 
 B = Bug
 
 F = Fix
 
 - B: List items being appended even if invalid:
-  - F: Append inside if block
+  - F: Append to list form inside `if` block
 
 - B: Final list appending items separately instead of making one big list:
   - F: Use `.extend()` not `.append()`
@@ -571,8 +572,8 @@ F = Fix
   - F: Append to new list from inside `for` loop
 
 - B: Unable to use `<` operand between string and int:
-  - F: Don't use list comprehension for different data types. Use `if` conditional check 
-       before appending
+  - F: Don't use list comprehension for different data types. Use `if`
+        conditional check before appending
 
 - B: List keeps appending values when function is restarted:
   - F: Use `list.clear()` method in `if` statement
@@ -625,10 +626,10 @@ Inputs are handled appropriately. Errors are recognized by the program, which
 
 This project was data-driven and as such, 
  [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming) concepts such
- as classes were not present in my solution. The program, along with the
+ as classes were not present in my solution. The program along with the
  spreadsheet work in tandem to meet the needs of real-world business. The data
  model uses real figures which produce an accurate result for the business'
- needs.
+ needs, every time.
 
 Every effort has been made to implement efficient, well-documented code that
  leverages the power of Python. I found features such as list comprehensions 
@@ -651,7 +652,7 @@ Design of the project was considerate of its future users. At its core, it is
  a tool for working with numbers, but it is still important to elicit a positive
  emotional response from users - especially in the fast-paced work environment
  it was designed for. Commands are politely assertive, whilst always keeping the
- user in control of their data.
+ user informed and in control of their data.
 
 The program is designed in such a way that the user only performs the actions
  essential to program function. Any errors are reported and feedback is given
@@ -695,13 +696,15 @@ but never exposed as project files are pushed to GitHub.
 Heroku was the platform chosen to host the program, for its capability for
  hosting dynamic content. My code was used alongside the
   [CI Python template](https://github.com/Code-Institute-Org/ython-essentials-template)
-  to produce the 'mock-terminal' effect found on the deployed site. This allows users to interact with the code directly, much like running the `run.py` file in an IDE.
+  to produce the 'mock-terminal' effect found on the deployed site. This allows 
+  users to interact with the code directly, much like running the `run.py` file 
+  in an IDE.
 
 There were several steps to deploying this project, which are more involved than
  simply
  [deploying to GitHub Pages.](https://github.com/jts272/pp2-license-to-quiz#deployment-cloning--forking)
  By following these steps *in order*, you may publish a similar application to
- the web.
+ the web:
 
 In `run.py` (or the name of the file(s) running the program logic):
 
@@ -790,7 +793,7 @@ How to Fork:
 \- This formed the foundation for the project, which integrated with the CI mock
 terminal that the project is presented in.
 
-IDE - VS Code in [Gitpod](https://www.gitpod.io/)
+IDE: VS Code in [Gitpod](https://www.gitpod.io/)
 
 [Google Account](https://www.google.com/account/about/?hl=en-US) Services for
  API integration:
@@ -799,11 +802,11 @@ IDE - VS Code in [Gitpod](https://www.gitpod.io/)
 - Google Sheets
 - Google Drive
 
-Deployment Platform - [Heroku](https://www.heroku.com/)
+Deployment Platform: [Heroku](https://www.heroku.com/)
 
-Flowchart Editor - [Lucid Charts](https://www.lucidchart.com/pages/)
+Flowchart Editor: [Lucid Charts](https://www.lucidchart.com/pages/)
 
-Language - Python 3.8.11
+Language: Python 3.8.11
 
 Python Libraries - latest versions imported and installed from terminal:
 
@@ -847,7 +850,7 @@ I had considered a secondary function to make, using OOP, to provide information
  program. This data can easily be pulled from the spreadsheet, which has a
  dedicated item reference sheet that is already in use. This would allow the
  data to be dynamically updated 'from the other side'. Imagine an item PLU code
- being changed. The program would still reference the relevant sheet  cell -
+ being changed. The program would still reference the relevant sheet cell -
  only the content will have changed.
 
  Overall, I decided that working with a familiar process and dataset would
